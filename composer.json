@@ -1,0 +1,19 @@
+{
+  "name": "donid/dhifa_collection",
+  "description": "Dhifa Collection",
+  "type": "project",
+  "autoload": {
+    "psr-4": {
+      "Donid\\DhifaCollection\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Doni Darmawan",
+      "email": "doni.duaasattuu@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=8"
+  }
+}
