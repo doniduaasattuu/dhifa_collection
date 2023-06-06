@@ -81,6 +81,12 @@ class UserController
         View::render("UserController/login", $model);
     }
 
+    public function logout()
+    {
+        session_destroy();
+        header("location: /login");
+    }
+
     public function login_request()
     {
 
@@ -94,9 +100,16 @@ class UserController
 
         foreach ($statement as $result) {
             if ($username_from_client == $result[0] && $password_from_client == $result[1]) {
+
+                $_SESSION['username'] = $result[0];
                 $_SESSION['fullname'] = $result[2];
-                self::redirect("/");
-                return;
+
+                echo <<<HOME
+                <script>
+                    window.location = "/";
+                </script>
+                HOME;
+                exit();
             }
         }
         self::redirect("/login");

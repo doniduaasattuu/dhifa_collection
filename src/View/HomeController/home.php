@@ -17,8 +17,7 @@
 <script>
     const logout = document.getElementById("logout");
     logout.onclick = () => {
-        <?php session_destroy() ?>
-        window.location = "/";
+        window.location = "/logout";
     }
 </script>
 
