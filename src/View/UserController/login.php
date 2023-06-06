@@ -9,6 +9,7 @@
 </head>
 
 <body>
+
     <h1><?= $model["content"] ?></h1>
     <form action="login_request" method="POST">
         <label for="username">Username</label>
@@ -17,9 +18,25 @@
         <label for="password">Password</label>
         <input id="password" name="password" type="password">
         <br>
-        <input type="submit" value="Login">
+        <input disabled id="submit" type="submit" value="Login">
         <p>Belum punya akun ? Daftar <a href="register">disini</a></p>
     </form>
+
+    <script>
+        const username = document.getElementById("username");
+        const password = document.getElementById("password");
+        const submit = document.getElementById("submit");
+
+        const input = document.getElementsByTagName("input");
+
+        for (let i = 0; i < input.length - 1; i++) {
+            input[i].onchange = () => {
+                if (password.value != "" && username.value != "") {
+                    submit.removeAttribute("disabled")
+                }
+            }
+        }
+    </script>
 </body>
 
 </html>

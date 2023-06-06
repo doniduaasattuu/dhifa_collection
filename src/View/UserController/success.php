@@ -11,7 +11,7 @@
 <body>
 </body>
 <script>
-    alert("Registration Success ✔")
+    alert("Registration Success ✅")
     window.location = "/login";
 </script>
 

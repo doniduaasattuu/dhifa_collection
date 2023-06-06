@@ -10,15 +10,17 @@
 
 <body>
     <h1><?= $model["content"] ?></h1>
-    <h3><?= "Hello " . $_SESSION["fullname"] ?> 👋🏻</h3>
+    <?php
 
-    <button id="logout">Logout</button>
-</body>
-<script>
-    const logout = document.getElementById("logout");
-    logout.onclick = () => {
-        window.location = "/logout";
+    foreach ($model["statement"] as $product) {
+
+        for ($i = 0; $i < sizeof($product) / 2; $i++) {
+            echo $product[$i] . " ";
+        }
+        echo "</br>";
     }
-</script>
+
+    ?>
+</body>
 
 </html>

@@ -50,10 +50,16 @@ class UserController
 
         // VALIDATE USERNAME IS NOT DUPLICATE
         if (isset($result[0]) && $result[0]["username"] == $username_from_register) {
-            echo "Username " . $result[0]["username"] . " sudah digunakan";
+            // echo "Username " . $result[0]["username"] . " sudah digunakan";
+            echo <<<GAGAL
+            <script>
+                alert("Username sudah digunakan! ⚠️");
+                window.location = "/register";
+            </script>
+            GAGAL;
         } else {
             // CREATE ACOUNT AND INSERT INTO DATABASE USERS
-            if ($username_from_register != "") {
+            if ($username_from_register != " " && $username_from_register != "" && $username_from_register != null) {
                 $connection = Database::get_connection();
                 $connection->query("INSERT INTO users VALUES ('$username_from_register', '$password_from_register', '$fullname_from_register', '$address_from_register', '$phone_number_from_register');");
                 $connection = null;
@@ -64,21 +70,29 @@ class UserController
                 ];
 
                 View::render("UserController/success", $model);
+            } else {
+                echo <<<GAGAL
+                <script>
+                    alert("Username tidak boleh kosong! ⚠️");
+                    window.location = "/register";
+                </script>
+                GAGAL;
             }
-
-            self::redirect("/register");
         }
     }
 
     public function login()
     {
+        if (isset($_SESSION["username"])) {
+            self::redirect("/");
+        } else {
+            $model = [
+                "title" => "Login",
+                "content" => "Halaman Login"
+            ];
 
-        $model = [
-            "title" => "Login",
-            "content" => "Halaman Login"
-        ];
-
-        View::render("UserController/login", $model);
+            View::render("UserController/login", $model);
+        }
     }
 
     public function logout()
