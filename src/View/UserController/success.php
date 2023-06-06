@@ -9,17 +9,10 @@
 </head>
 
 <body>
-    <h1><?= $model["content"] ?></h1>
-    <h3><?= "Hello " . $_SESSION["fullname"] ?></h3>
-
-    <button id="logout">Logout</button>
 </body>
 <script>
-    const logout = document.getElementById("logout");
-    logout.onclick = () => {
-        <?php session_destroy() ?>
-        window.location = "/";
-    }
+    alert("Registration Success ✔")
+    window.location = "/login";
 </script>
 
 </html>

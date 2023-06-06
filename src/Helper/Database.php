@@ -10,7 +10,7 @@ class Database
 
         $database = "dhifa_collection";
         $username = "root";
-        $password = "";
+        $password = "1234";
         $port = "3306";
         $host = "localhost";
 

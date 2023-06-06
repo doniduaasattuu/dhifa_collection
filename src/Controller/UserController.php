@@ -8,6 +8,12 @@ use Donid\DhifaCollection\Entity\User;
 
 class UserController
 {
+
+    public static function redirect(string $path): void
+    {
+        header("location: $path");
+    }
+
     public function register()
     {
         $model = [
@@ -35,7 +41,33 @@ class UserController
         $user->setAddress($address_from_register);
         $user->setPhone_number($phone_number_from_register);
 
-        var_dump($user);
+        $connection = Database::get_connection();
+        $sql = "SELECT username FROM users WHERE username = '$username_from_register'";
+        $statement = $connection->prepare($sql);
+        $statement->execute();
+
+        $result = $statement->fetchAll();
+
+        // VALIDATE USERNAME IS NOT DUPLICATE
+        if (isset($result[0]) && $result[0]["username"] == $username_from_register) {
+            echo "Username " . $result[0]["username"] . " sudah digunakan";
+        } else {
+            // CREATE ACOUNT AND INSERT INTO DATABASE USERS
+            if ($username_from_register != "") {
+                $connection = Database::get_connection();
+                $connection->query("INSERT INTO users VALUES ('$username_from_register', '$password_from_register', '$fullname_from_register', '$address_from_register', '$phone_number_from_register');");
+                $connection = null;
+
+                $model = [
+                    "title" => "Registration Success",
+                    "Content" => "Registration Success"
+                ];
+
+                View::render("UserController/success", $model);
+            }
+
+            self::redirect("/register");
+        }
     }
 
     public function login()
@@ -52,11 +84,6 @@ class UserController
     public function login_request()
     {
 
-        function redirect($path)
-        {
-            header("location: $path");
-        };
-
         $username_from_client = trim($_POST["username"], " ");
         $password_from_client = trim($_POST["password"], " ");
 
@@ -67,12 +94,12 @@ class UserController
 
         foreach ($statement as $result) {
             if ($username_from_client == $result[0] && $password_from_client == $result[1]) {
-                $_SESSION['username'] = $username_from_client;
-                redirect("/");
+                $_SESSION['fullname'] = $result[2];
+                self::redirect("/");
                 return;
             }
         }
-        redirect("login");
+        self::redirect("/login");
         return;
     }
 }

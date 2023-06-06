@@ -27,6 +27,8 @@
         <input id="phone_number" name="phone_number" type="number">
         <br>
         <input type="submit" value="Daftar">
+        <br>
+        <p>Sudah punya akun ?, Login <a href="/login">disini</a></p>
     </form>
 </body>
 
