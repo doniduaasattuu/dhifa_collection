@@ -24,7 +24,7 @@ class UserController
         View::render("UserController/register", $model);
     }
 
-    public function create_acount()
+    public function create_account()
     {
 
         $username_from_register = trim($_POST["username"], " ");
@@ -58,7 +58,7 @@ class UserController
             </script>
             GAGAL;
         } else {
-            // CREATE ACOUNT AND INSERT INTO DATABASE USERS
+            // CREATE ACCOUNT AND INSERT INTO DATABASE USERS
             if ($username_from_register != " " && $username_from_register != "" && $username_from_register != null) {
                 $connection = Database::get_connection();
                 $connection->query("INSERT INTO users VALUES ('$username_from_register', '$password_from_register', '$fullname_from_register', '$address_from_register', '$phone_number_from_register');");

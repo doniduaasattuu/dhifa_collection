@@ -7,7 +7,7 @@ use Donid\DhifaCollection\App\View;
 
 class ProductController
 {
-    public function product()
+    public function products()
     {
         $connection = Database::get_connection();
         $sql = "SELECT * FROM products ORDER BY id";
@@ -21,5 +21,7 @@ class ProductController
         ];
 
         View::render("ProductController/show_products", $model);
+
+        $connection = null;
     }
 }
