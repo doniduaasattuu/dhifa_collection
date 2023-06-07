@@ -15,6 +15,6 @@ class HomeController
             "content" => "Dhifa Collection"
         ];
 
-        View::render("HomeController/navbar", $model);
+        View::render("HomeController/home", $model);
     }
 }

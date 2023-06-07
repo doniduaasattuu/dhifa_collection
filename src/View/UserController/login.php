@@ -13,25 +13,43 @@
 
 <body>
 
-    <div class="container">
-        <div class="d-flex h-100 justify-content-center ">
-            <form class="align-items-center" style="max-width: 300px" action="/login_request" method="POST">
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                    <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+    <!-- d-flex justify-content-center align-content-center -->
+    <div class="container d-flex vh-100">
+        <div class="my-auto align-items-center mx-auto justify-content-center" style="min-width: 300px;">
+
+            <?php
+
+            if (isset($model["login"])) {
+                $alert = <<<ALERT
+                    <div class="alert alert-danger" role="alert">
+                        Username or password is wrong! ⚠️
+                    </div>
+                    ALERT;
+                echo $alert;
+            }
+
+            ?>
+
+            <h2 class="mb-4"><?= $model["content"] ?></h2>
+            <form action="login" method="POST">
+                <div class=" mb-3">
+                    <label for="email" class="form-label -mb-5">Email address</label>
+                    <input type="email" id="email" name="email" class="form-control" id="email" aria-describedby="emailHelp">
+                    <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
                 </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                <div class="mb-3">
+                    <label for="password" class="form-label -mb-5">Password</label>
+                    <input id="password" name="password" type="password" class="form-control" id="password">
                 </div>
-                <div class="form-group form-check">
+                <!-- <div class="mb-3 form-check">
                     <input type="checkbox" class="form-check-input" id="exampleCheck1">
                     <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                </div>
+                </div> -->
                 <button type="submit" class="btn btn-primary">Submit</button>
+                <div id="emailHelp" class="form-text">Don't have account ?, Register <a class="text-decoration-none" href="/register">here</a></div>
             </form>
         </div>
+
     </div>
 
     <!-- <h1><?= $model["content"] ?></h1>

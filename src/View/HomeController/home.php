@@ -52,36 +52,36 @@
         </div>
     </nav> -->
 
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container">
-            <a class="navbar-brand" href="#"><?= $model["content"] ?></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <nav class="sticky-top navbar navbar-expand-lg bg-body-tertiary ">
+        <div class="container ">
+            <a class="text-dark fw-medium me-5 navbar-brand" href="#"><?= $model["content"] ?></a>
+            <button class="focus-ring navbar-toggler" style="--bs-focus-ring-width: 0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="mt-4 mt-lg-0 collapse navbar-collapse" id="navbarSupportedContent">
                 <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-primary" type="submit">Search</button>
                 </form>
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item me-4">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <li class="nav-item me-5">
+                        <a class="text-dark nav-link" aria-current="page" href="#">Home</a>
                     </li>
-                    <li class="nav-item me-4">
-                        <a class="nav-link" href="#">Cart</a>
+                    <li class="nav-item me-5">
+                        <a class="text-dark nav-link" href="#">Cart</a>
                     </li>
-                    <li class="nav-item me-4">
-                        <a class="nav-link" href="/products">Products</a>
+                    <li class="nav-item me-5">
+                        <a class="text-dark nav-link" href="/products">Products</a>
                     </li>
-                    <li class="nav-item me-4">
-                        <a class="nav-link" href="#">Contact</a>
+                    <li class="nav-item me-5">
+                        <a class="text-dark nav-link" href="#">Contact</a>
                     </li>
-                    <li class="nav-item dropdown me-4">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <li class="nav-item dropdown">
+                        <a class="text-dark nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Account
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Edit Account</a></li>
+                            <li><a class="text-dark dropdown-item" href="#">Edit Account</a></li>
                             <li><a class="text-light bg-danger dropdown-item" href="/logout">Logout</a></li>
                         </ul>
                     </li>
@@ -90,8 +90,11 @@
         </div>
     </nav>
 
-
-
+    <div class="hero">
+        <div class="container">
+            <h4>Hello <?= $_SESSION["fullname"] ?></h4>
+        </div>
+    </div>
 
 </body>
 

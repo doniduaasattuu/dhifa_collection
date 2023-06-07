@@ -15,9 +15,13 @@ Router::add("GET", "/", HomeController::class, "home", [AuthMiddleware::class]);
 
 // USER CONTROLLER
 Router::add("GET", "/register", UserController::class, "register");
+Router::add("POST", "/register", UserController::class, "register");
+
 Router::add("POST", "/create_account", UserController::class, "create_account");
+
 Router::add("GET", "/login", UserController::class, "login");
-Router::add("POST", "/login_request", UserController::class, "login_request");
+Router::add("POST", "/login", UserController::class, "login");
+
 Router::add("GET", "/logout", UserController::class, "logout");
 
 // PRODUCT CONTROLLER
