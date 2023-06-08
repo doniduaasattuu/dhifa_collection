@@ -13,6 +13,27 @@
 
 <body>
 
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="bg-light modal-header">
+                    <h1 class=" modal-title fs-5" id="exampleModalLabel">Registration Success! ✅</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Congratulations!, your account has been successfully created,
+                    Keep in mind your email and password.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- d-flex justify-content-center align-content-center -->
     <div class="container d-flex vh-100">
         <div class="my-auto align-items-center mx-auto justify-content-center" style="min-width: 300px;">
@@ -21,11 +42,21 @@
 
             if (isset($model["login"])) {
                 $alert = <<<ALERT
-                    <div class="alert alert-danger" role="alert">
-                        Username or password is wrong! ⚠️
-                    </div>
-                    ALERT;
+                            <div class="alert alert-danger" role="alert">
+                                Username or password is wrong! ⚠️
+                            </div>
+                            ALERT;
                 echo $alert;
+            }
+
+            if (isset($model["registration_success"])) {
+                $modal = <<<MODAL
+                            <script>
+                                let myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {});
+                                myModal.show();
+                            </script>
+                            MODAL;
+                echo $modal;
             }
 
             ?>
@@ -46,7 +77,7 @@
                     <label class="form-check-label" for="exampleCheck1">Check me out</label>
                 </div> -->
                 <button type="submit" class="btn btn-primary">Submit</button>
-                <div id="emailHelp" class="form-text">Don't have account ?, Register <a class="text-decoration-none" href="/register">here</a></div>
+                <div id="emailHelp" class="form-text">Don't have an account ?, Register <a class="text-decoration-none" href="/register">here</a></div>
             </form>
         </div>
 

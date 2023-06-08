@@ -76,9 +76,23 @@ class UserController
                         "email_duplicate" => true
                     ];
 
+                    $connection = null;
+
                     View::render("UserController/register", $model);
                 } else {
-                    echo "LOGIN SUCCESS";
+                    $connection = Database::get_connection();
+                    $sql = "INSERT INTO users (email, password, fullname, address, phone_number) VALUES ('$email_from_register', '$password_from_register', '$fullname_from_register', '$address_from_register', '$phone_number_from_register');";
+                    $connection->query($sql);
+
+                    $connection = null;
+
+                    $model = [
+                        "title" => "Login",
+                        "content" => "Login",
+                        "registration_success" => true
+                    ];
+
+                    View::render("UserController/login", $model);
                 }
             }
         }
