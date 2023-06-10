@@ -1,0 +1,39 @@
+@startuml dhifa_collection
+
+Entity users {
+    * email: VARCHAR(30) <<PK>>
+    --
+    * password: VARCHAR(30)
+    * fullname: VARHCAR(50)
+    * address: VARHCAR(50)
+    * phone_number: VARHCAR(50)
+}
+
+Entity products {
+    * id_product: INT(11) <<PK>>
+    --
+    * name: VARCHAR(100)
+    * price: BIGINT
+    * qty: INT(11)
+}
+
+Entity orders {
+    * id_order: INT(11) <<PK>>
+    --
+    * email: VARCHAR(30) <<FK>>
+    * total: BIGINT
+    * order_date: DATE
+}
+
+Entity order_detail {
+    * id_order: INT(11) <<PK>>
+    --
+    * email: VARCHAR(30) <<FK>>
+    * id_product: INT(11) <<FK>>
+}
+
+users |o--o{ orders: memiliki
+orders ||--o{ order_detail: memiliki
+order_detail ||--|| products
+
+@enduml

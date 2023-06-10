@@ -27,7 +27,7 @@ class UserController
 
             $email_from_register = trim($_POST["email"], " ");
             $password_from_register = trim($_POST["password"], " ");
-            $fullname_from_register = trim($_POST["fullname"]);
+            $fullname_from_register = ucwords(trim($_POST["fullname"]));
             $address_from_register = trim($_POST["address"], " ");
             $phone_number_from_register = trim($_POST["phone_number"], " ");
 
@@ -97,73 +97,6 @@ class UserController
             }
         }
     }
-
-    // public function register()
-    // {
-    //     $model = [
-    //         "title" => "Registration",
-    //         "content" => "Registration"
-    //     ];
-
-    //     View::render("UserController/register", $model);
-    // }
-
-    // public function create_account()
-    // {
-
-    //     $email_from_register = trim($_POST["email"], " ");
-    //     $password_from_register = $_POST["password"];
-    //     $fullname_from_register = $_POST["fullname"];
-    //     $address_from_register = $_POST["address"];
-    //     $phone_number_from_register = $_POST["phone_number"];
-
-    //     $user = new User();
-
-    //     $user->setUsername($email_from_register);
-    //     $user->setPassword($password_from_register);
-    //     $user->setFullname($fullname_from_register);
-    //     $user->setAddress($address_from_register);
-    //     $user->setPhone_number($phone_number_from_register);
-
-    //     $connection = Database::get_connection();
-    //     $sql = "SELECT username FROM users WHERE username = '$email_from_register'";
-    //     $statement = $connection->prepare($sql);
-    //     $statement->execute();
-
-    //     $result = $statement->fetchAll();
-
-    //     // VALIDATE USERNAME IS NOT DUPLICATE
-    //     if (isset($result[0]) && $result[0]["username"] == $email_from_register) {
-    //         // echo "Username " . $result[0]["username"] . " sudah digunakan";
-    //         echo <<<GAGAL
-    //         <script>
-    //             alert("Username sudah digunakan! ⚠️");
-    //             window.location = "/register";
-    //         </script>
-    //         GAGAL;
-    //     } else {
-    //         // CREATE ACCOUNT AND INSERT INTO DATABASE USERS
-    //         if ($email_from_register != " " && $email_from_register != "" && $email_from_register != null) {
-    //             $connection = Database::get_connection();
-    //             $connection->query("INSERT INTO users VALUES ('$email_from_register', '$password_from_register', '$fullname_from_register', '$address_from_register', '$phone_number_from_register');");
-    //             $connection = null;
-
-    //             $model = [
-    //                 "title" => "Registration Success",
-    //                 "Content" => "Registration Success"
-    //             ];
-
-    //             View::render("UserController/success", $model);
-    //         } else {
-    //             echo <<<GAGAL
-    //             <script>
-    //                 alert("Username tidak boleh kosong! ⚠️");
-    //                 window.location = "/register";
-    //             </script>
-    //             GAGAL;
-    //         }
-    //     }
-    // }
 
     public function login()
     {

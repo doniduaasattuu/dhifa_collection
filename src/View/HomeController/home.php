@@ -8,7 +8,6 @@
     <!-- BOOTSTRAP -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-    <link href="carousel.css" rel="stylesheet">
     <title><?= $model["title"] ?></title>
 </head>
 
@@ -164,10 +163,13 @@
     }
 </style>
 
-<body>
-    <nav class="sticky-top navbar navbar-expand-lg bg-body-tertiary zindex-fixed shadow-sm">
+<body style="scrollbar-width: none;">
+
+    <?= $model["navbar"]; ?>
+
+    <!-- <nav class="sticky-top navbar navbar-expand-lg bg-body-tertiary zindex-fixed shadow-sm">
         <div class="container py-2">
-            <a class="text-dark fw-medium me-xl-5 me-lg-3 navbar-brand" href="#"><?= $model["content"] ?></a>
+            <a class="text-dark fw-medium me-xl-5 me-lg-3 navbar-brand" href="#">Dhifa Collection</a>
             <button class="focus-ring navbar-toggler" style="--bs-focus-ring-width: 0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -181,10 +183,10 @@
                         <a class="text-dark nav-link" aria-current="page" href="#">Home</a>
                     </li>
                     <li class="nav-item me-xl-5 me-lg-3">
-                        <a class="text-dark nav-link" href="#">Cart</a>
+                        <a class="text-dark nav-link" href="cart">Cart</a>
                     </li>
                     <li class="nav-item me-xl-5 me-lg-3">
-                        <a class="text-dark nav-link" href="/products">Products</a>
+                        <a class="text-dark nav-link" href="/products">New arrival</a>
                     </li>
                     <li class="nav-item me-xl-5 me-lg-3">
                         <a class="text-dark nav-link" href="#">Contact</a>
@@ -201,7 +203,8 @@
                 </ul>
             </div>
         </div>
-    </nav>
+    </nav> -->
+
 
     <div id="myCarousel" class="carousel slide mb-0" data-bs-ride="carousel" data-bs-theme="light">
         <div class="carousel-indicators">
@@ -212,7 +215,7 @@
             <div style="background-image: url('img/womens.jpg'); background-size: cover;" class="carousel-item active">
                 <!-- <img class="img-fluid h-100" src="img/womens.jpg" alt="Women's wear"> -->
                 <div class="container">
-                    <div class="carousel-caption text-dark text-start">
+                    <div class="carousel-caption text-end text-light ">
                         <h1>Women's collection.</h1>
                         <p>For everyday elegance.</p>
                         <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
@@ -224,7 +227,7 @@
                 <!-- <img class="img-fluid" src="img/mens.jpg" alt="Men's wear"> -->
                 <div class="container">
                     <div class="carousel-caption text-end text-dark">
-                        <h1>One more for good measure.</h1>
+                        <h1>Men's collection.</h1>
                         <p>The ultimate men's apparel.</p>
                         <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
                     </div>
@@ -242,175 +245,108 @@
         </button>
     </div>
 
+    <!-- CAROUSEL -->
     <div class="album py-5 bg-body-tertiary">
         <div class="container">
-            <h3>
+            <h2>
                 Hello <?= $_SESSION["fullname"] ?>
-            </h3>
-            <p class="text-lg-start">This is our best seller.</p>
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <img src="img/1.png" alt="">
-                        <div class="card-body">
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                </div>
-                                <small class="text-body-secondary">9 mins</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            </h2>
 
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <img src="img/1.png" alt="">
-                        <div class="card-body">
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                </div>
-                                <small class="text-body-secondary">9 mins</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <!-- CARD WRAPPER -->
+            <p class="mb-4 text-lg-start">Our best seller collections.</p>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-3">
 
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <img src="img/1.png" alt="">
-                        <div class="card-body">
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                </div>
-                                <small class="text-body-secondary">9 mins</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <img src="img/1.png" alt="">
-                        <div class="card-body">
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                </div>
-                                <small class="text-body-secondary">9 mins</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <?php
 
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <img src="img/1.png" alt="">
-                        <div class="card-body">
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                foreach ($model["products"] as $product) {
+                ?>
+                    <!-- CARD START -->
+                    <div class="col">
+                        <div class="card  shadow-sm">
+                            <img class="rounded-top img-fluid" src="img/<?php echo $product["id_product"] ?>.jpg" alt="<?php echo $product["name"] ?>">
+                            <div class="card-body">
+                                <h4><?php echo $product["name"] ?></h4>
+                                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore deleniti quae sequi iure, voluptatibus voluptas?.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <button id="<?php echo $product["id_product"] ?>" product_name="<?php echo $product["name"] ?>" price="<?php echo $product["price"] ?>" type="button" class="myButton btn btn-sm btn-outline-secondary">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-check-fill me-1 " viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zm-.646 5.354a.5.5 0 0 0-.708-.708L7.5 10.793 6.354 9.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z" />
+                                            </svg>
+                                            Add to cart</button>
+                                    </div>
+                                    <small class="text-body-secondary">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-currency-dollar mt-2" viewBox="0 0 16 16">
+                                            <path d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718H4zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73l.348.086z" />
+                                        </svg>
+                                        IDR
+                                        <?php echo $product["price"] ?>K
+                                    </small>
                                 </div>
-                                <small class="text-body-secondary">9 mins</small>
                             </div>
                         </div>
                     </div>
-                </div>
+                    <!-- CARD END -->
 
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <img src="img/1.png" alt="">
-                        <div class="card-body">
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                </div>
-                                <small class="text-body-secondary">9 mins</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <img src="img/1.png" alt="">
-                        <div class="card-body">
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                </div>
-                                <small class="text-body-secondary">9 mins</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <?php
+                }
+                ?>
 
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <img src="img/1.png" alt="">
-                        <div class="card-body">
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                </div>
-                                <small class="text-body-secondary">9 mins</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <img src="img/1.png" alt="">
-                        <div class="card-body">
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                </div>
-                                <small class="text-body-secondary">9 mins</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <img src="img/1.png" alt="">
-                        <div class="card-body">
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                </div>
-                                <small class="text-body-secondary">9 mins</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
+    <!-- CAROUSEL END -->
+
+    <!-- FOOTER START -->
+    <div class="border-top">
+        <div class="container">
+            <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 ">
+
+                <p class="col-md-4 mb-0 text-body-secondary">&copy; 2023 Dhifa Collection, Inc</p>
+
+                <!-- <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                    <svg class="bi me-2" width="40" height="32">
+                        <use xlink:href="#bootstrap" />
+                    </svg>
+                </a> -->
+
+                <ul class="nav col-md-4 justify-content-end">
+                    <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Cart</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Contact</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About</a></li>
+                </ul>
+
+            </footer>
+        </div>
+    </div>
+    <!-- FOOTER END -->
+
+
+    <script>
+        const button = document.getElementsByClassName("myButton");
+
+        for (let i = 0; i < button.length; i++) {
+            button[i].onclick = () => {
+                console.info(button[i]);
+
+                let name = button[i].getAttribute("product_name");
+                let price = button[i].getAttribute("price");
+                // let qty = button[i].getAttribute("qty");
+                // let amount = button[i].getAttribute("amount");
+
+                const ajax = new XMLHttpRequest();
+                ajax.open("POST", "add_to_cart");
+                ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+                ajax.send(`name=${name}&price=${price}`);
+
+                alert(button[i].getAttribute("product_name") + " added to cart")
+            }
+        }
+    </script>
 </body>
 
 </html>
