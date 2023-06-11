@@ -12,11 +12,16 @@
 
 <style>
     #shopping_summary {
-        width: 25rem;
+        width: 23rem;
     }
 
     @media (max-width: 576px) {
         #shopping_summary {
+            width: 100%;
+        }
+
+        .clean_basket {
+            margin-bottom: 1rem;
             width: 100%;
         }
     }
@@ -27,7 +32,10 @@
     <?= $model["navbar"] ?>
 
     <div class="container vh-100 py-5">
-        <h1><?= $model["content"] ?></h1>
+        <h1 class="mb-4"><?php
+                            $firstname = explode(" ", $_SESSION["fullname"]);
+                            echo $firstname[0];
+                            ?>'s Cart</h1>
 
         <table class="table my-3">
             <thead>
@@ -50,9 +58,9 @@
                         <td class="align-middle"><?php echo $cart["name"]; ?></td>
                         <td class="price align-middle"><?php echo $cart["price"]; ?>K</td>
                         <td class="align-middle">
-                            <button class="button_decrement btn btn-outline-primary btn-sm me-1">-</button>
+                            <button product_name="<?php echo $cart["name"] ?>" class="button_decrement btn btn-outline-primary btn-sm me-1">-</button>
                             <span class="text-center align-middle" style="width: 25px;" class="d-sm-inline-block"><?php echo $cart["qty"]; ?></span>
-                            <button class="button_increment btn btn-outline-primary btn-sm ms-1">+</button>
+                            <button product_name="<?php echo $cart["name"] ?>" class="button_increment btn btn-outline-primary btn-sm ms-1">+</button>
                         <td class="amount align-middle"><?php echo $cart["amount"]; ?>K</td>
                     </tr>
                 <?php
@@ -63,14 +71,21 @@
             </tbody>
         </table>
 
-        <div class="ms-auto mt-4 card" id="shopping_summary">
-            <div class=" card-body">
-                <h5 class="card-title">Shopping summary</h5>
-                <p class="pt-3 border-top card-text"><span class=" fw-medium">Total amount</span> : IDR <span class="total_amount">900</span>K</p>
-                <hr>
-                <p class="card-text"><span class="fw-medium">Shipping address</span> : Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste error ducimus inventore. Iusto, explicabo voluptatibus?</p>
-                <hr>
-                <a href="#" class="btn btn-primary">Checkout</a>
+        <div class="row mt-4">
+            <div class="col-sm">
+                <button id="clean_basket" class="clean_basket mb-sm-0 btn btn-outline-danger">Delete basket</button>
+            </div>
+            <div class="col-sm">
+                <div class="ms-auto card" id="shopping_summary">
+                    <div class=" card-body">
+                        <h5 class="card-title">Shopping summary</h5>
+                        <p class="pt-3 border-top card-text"><span class=" fw-medium">Total amount</span> : IDR <span class="total_amount">0</span>K</p>
+                        <hr>
+                        <p class="card-text"><span class="fw-medium">Shipping address</span> : <?= $_SESSION["address"] ?></p>
+                        <hr>
+                        <a href="#" class="btn btn-primary">Checkout</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -98,6 +113,21 @@
                     amount[i].textContent = amount_update + "K";
 
                     sum_total_amount();
+
+                    // =======================================
+                    // UPDATE KUANTITI KE DATABASE MELALUI API
+                    // =======================================
+                    update_cart_quantity(button_decrement[i], "decrement", amount_update);
+
+                    // const update_cart_quantity_api = new XMLHttpRequest();
+
+                    // update_cart_quantity_api.open("POST", "update_cart_quantity");
+
+                    // let product_name_to_update = button_decrement[i].getAttribute("product_name");
+
+                    // update_cart_quantity_api.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+                    // update_cart_quantity_api.send(`name=${product_name_to_update}&function=decrement`);
                 }
             }
         }
@@ -114,7 +144,36 @@
                 amount[i].textContent = amount_update + "K";
 
                 sum_total_amount();
+
+                // =======================================
+                // UPDATE KUANTITI KE DATABASE MELALUI API
+                // =======================================
+                update_cart_quantity(button_increment[i], "increment", amount_update);
+
+                // const update_cart_quantity_api = new XMLHttpRequest();
+
+                // update_cart_quantity_api.open("POST", "update_cart_quantity");
+
+                // let product_name_to_update = button_increment[i].getAttribute("product_name");
+
+                // update_cart_quantity_api.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+                // update_cart_quantity_api.send(`name=${product_name_to_update}&function=increment`);
             }
+        }
+
+
+        // FUNCTION UPDATE KUANTITI KE DATABASE 
+        function update_cart_quantity(button, method, amount) {
+            const update_cart_quantity_api = new XMLHttpRequest();
+
+            update_cart_quantity_api.open("POST", "update_cart_quantity");
+
+            let product_name_to_update = button.getAttribute("product_name");
+
+            update_cart_quantity_api.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            update_cart_quantity_api.send(`name=${product_name_to_update}&function=${method}&amount=${amount}`);
         }
 
         // SUM AMOUNT AS TOTAL AMOUNT
@@ -132,6 +191,28 @@
         // WINDOW ON LOAD
         window.onload = () => {
             sum_total_amount();
+        }
+
+        // =================================
+        // CLEAN BASKET FUNCTION 
+        // =================================
+        const clean_basket_button = document.getElementById("clean_basket");
+        clean_basket_button.onclick = () => {
+
+            const sure_delete_basket = confirm("Do you really want to delete ?")
+
+            if (sure_delete_basket == true) {
+                const clean_basket_api = new XMLHttpRequest();
+
+                clean_basket_api.open("POST", "clean_basket");
+
+                clean_basket_api.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+                clean_basket_api.send("table=order_detail");
+
+                alert("Basket was cleaned!")
+                location.reload();
+            }
         }
     </script>
 </body>

@@ -126,7 +126,15 @@ class UserController
 
                 if ($result == true && $result != null && $email_from_client != "" && $password_from_client != "" && $email_from_client != " " && $password_from_client != " " && ($result["email"] == $email_from_client) && ($result["password"] == $password_from_client)) {
                     $_SESSION["email"] = $email_from_client;
-                    $_SESSION["fullname"] = $result[2];
+                    $_SESSION["fullname"] = $result["fullname"];
+                    $_SESSION["address"] = $result["address"];
+
+                    $firstname = explode(" ", $_SESSION["fullname"]);
+
+                    date_default_timezone_set("Asia/Jakarta");
+
+                    $_SESSION["invoice"] = "INV/" . date("Y") . date("m") . date("d") . "/" .  date("H") . date("i") . $_SESSION["email"];
+
                     self::redirect("/");
                 } else {
                     $model = [
@@ -140,35 +148,6 @@ class UserController
             }
         }
     }
-
-
-    // public function login_request()
-    // {
-
-    // $email_from_client = trim($_POST["email"], " ");
-    // $password_from_client = trim($_POST["password"], " ");
-
-    // $connection = Database::get_connection();
-    // $sql = "SELECT * FROM users WHERE email = '$email_from_client'";
-    // $statement = $connection->prepare($sql);
-    // $statement->execute();
-
-    // $result = $statement->fetch();
-
-
-    // if ($result == true && $result != null) {
-    //     echo $result;
-    // } else {
-
-    //     $model = [
-    //         "title" => "Login Failed",
-    //         "content" => "Login Failed"
-    //     ];
-
-    //     View::render("UserController/login_failed", $model);
-    // }
-    // }
-
 
     public function logout()
     {

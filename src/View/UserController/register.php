@@ -51,11 +51,11 @@
                     <input id="password" name="password" type="password" class="form-control" id="exampleInputPassword1">
                 </div>
                 <div class="mb-3">
-                    <label for="fullname" class="form-label -mb-5">Fullname</label>
+                    <label for="fullname" class="form-label -mb-5">Full Name</label>
                     <input id="text" name="fullname" type="fullname" class="form-control" id="fullname">
                 </div>
                 <div class="mb-3">
-                    <label for="address" class="form-label -mb-5">Address</label>
+                    <label for="address" class="form-label -mb-5">Full Address</label>
                     <input id="text" name="address" type="address" class="form-control" id="address">
                 </div>
                 <div class="mb-3">

@@ -1,0 +1,16 @@
+SELECT os.order_id, pr.product_id, pr.name, pr.price, od.qty, od.amount, os.status FROM orders as os JOIN users as us ON (us.email = os.email) JOIN order_detail as od ON (od.order_id = os.order_id) JOIN products as pr ON (pr.product_id = od.product_id) ;
++-------------------+------------+---------------------+-------+-----+--------+--------+
+| order_id          | product_id | name                | price | qty | amount | status |
++-------------------+------------+---------------------+-------+-----+--------+--------+
+| INV/20230611/1351 |          1 | Pepe Jeans          |   120 |   1 |    120 | Open   |
+| INV/20230611/1351 |          2 | Tattered Sportswear |   110 |   1 |    110 | Open   |
+| INV/20230611/1351 |          3 | Style Vesture       |   150 |   1 |    150 | Open   |
++-------------------+------------+---------------------+-------+-----+--------+--------+
+
+
+select * from orders where status = "Open" and email = "doni@gmail.com";
++-------------------+----------------+------------+--------+
+| order_id          | email          | order_date | status |
++-------------------+----------------+------------+--------+
+| INV/20230611/1452 | doni@gmail.com | 2023-06-11 | Open   |
++-------------------+----------------+------------+--------+

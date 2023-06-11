@@ -12,7 +12,7 @@ class HomeController
     public function home()
     {
         $connection = Database::get_connection();
-        $sql = "SELECT id_product, name, price FROM products";
+        $sql = "SELECT product_id, name, price FROM products";
         $statement = $connection->prepare($sql);
         $statement->execute();
 

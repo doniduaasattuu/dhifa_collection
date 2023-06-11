@@ -250,10 +250,11 @@
         <div class="container">
             <h2>
                 Hello <?= $_SESSION["fullname"] ?>
+                Hello <?= $_SESSION["invoice"] ?>
             </h2>
 
             <!-- CARD WRAPPER -->
-            <p class="mb-4 text-lg-start">Our best seller collections.</p>
+            <p class="mb-4 text-lg-start">This is our best seller collections.</p>
             <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-3">
 
 
@@ -264,13 +265,13 @@
                     <!-- CARD START -->
                     <div class="col">
                         <div class="card  shadow-sm">
-                            <img class="rounded-top img-fluid" src="img/<?php echo $product["id_product"] ?>.jpg" alt="<?php echo $product["name"] ?>">
+                            <img class="rounded-top img-fluid" src="img/<?php echo $product["product_id"] ?>.jpg" alt="<?php echo $product["name"] ?>">
                             <div class="card-body">
                                 <h4><?php echo $product["name"] ?></h4>
                                 <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore deleniti quae sequi iure, voluptatibus voluptas?.</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                        <button id="<?php echo $product["id_product"] ?>" product_name="<?php echo $product["name"] ?>" price="<?php echo $product["price"] ?>" type="button" class="myButton btn btn-sm btn-outline-secondary">
+                                        <button product_id="<?php echo $product["product_id"] ?>" product_name="<?php echo $product["name"] ?>" price="<?php echo $product["price"] ?>" type="button" class="myButton btn btn-sm btn-outline-secondary">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-check-fill me-1 " viewBox="0 0 16 16">
                                                 <path fill-rule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zm-.646 5.354a.5.5 0 0 0-.708-.708L7.5 10.793 6.354 9.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z" />
                                             </svg>
@@ -330,9 +331,8 @@
 
         for (let i = 0; i < button.length; i++) {
             button[i].onclick = () => {
-                console.info(button[i]);
 
-                let name = button[i].getAttribute("product_name");
+                let id = button[i].getAttribute("product_id");
                 let price = button[i].getAttribute("price");
                 // let qty = button[i].getAttribute("qty");
                 // let amount = button[i].getAttribute("amount");
@@ -341,7 +341,7 @@
                 ajax.open("POST", "add_to_cart");
                 ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
-                ajax.send(`name=${name}&price=${price}`);
+                ajax.send(`id=${id}&price=${price}`);
 
                 alert(button[i].getAttribute("product_name") + " added to cart")
             }
