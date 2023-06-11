@@ -33,10 +33,8 @@ class Router
         $method = $_SERVER["REQUEST_METHOD"];
 
         foreach (self::$routes as $route) {
-            // if ($path == $route['path'] && $method == $route['method']) {
 
             if ($path == $route['path'] && $method == $route['method']) {
-                // echo "CONTROLLER : " . $route['controller'] . ", FUNCTION : " . $route['function'];
 
                 // call middleware
                 foreach ($route['middleware'] as $middleware) {

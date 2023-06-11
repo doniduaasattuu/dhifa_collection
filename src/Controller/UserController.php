@@ -133,7 +133,7 @@ class UserController
 
                     date_default_timezone_set("Asia/Jakarta");
 
-                    $_SESSION["invoice"] = "INV/" . date("Y") . date("m") . date("d") . "/" .  date("H") . date("i") . $_SESSION["email"];
+                    $_SESSION["invoice"] = "INV/" . date("Y") . date("m") . date("d") . "/" .  date("H") . date("i");
 
                     self::redirect("/");
                 } else {

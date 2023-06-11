@@ -23,23 +23,20 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Congratulations!, your account has been successfully created,
+                    Your account has been successfully created,
                     Keep in mind your email and password.
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
-                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- d-flex justify-content-center align-content-center -->
     <div class="container d-flex vh-100">
         <div class="my-auto align-items-center mx-auto justify-content-center" style="min-width: 300px;">
 
             <?php
-
             if (isset($model["login"])) {
                 $alert = <<<ALERT
                             <div class="alert alert-danger" role="alert">
@@ -58,7 +55,6 @@
                             MODAL;
                 echo $modal;
             }
-
             ?>
 
             <h2 class="mb-4"><?= $model["content"] ?></h2>
@@ -66,50 +62,18 @@
                 <div class=" mb-3">
                     <label for="email" class="form-label -mb-5">Email address</label>
                     <input type="email" id="email" name="email" class="form-control" id="email" aria-describedby="emailHelp">
-                    <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label -mb-5">Password</label>
                     <input id="password" name="password" type="password" class="form-control" id="password">
                 </div>
-                <!-- <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                </div> -->
+
                 <button type="submit" class="btn btn-primary">Submit</button>
                 <div id="emailHelp" class="form-text">Don't have an account ?, Register <a class="text-decoration-none" href="/register">here</a></div>
             </form>
         </div>
 
     </div>
-
-    <!-- <h1><?= $model["content"] ?></h1>
-    <form action="login_request" method="POST">
-        <label for="username">Username</label>
-        <input id="username" name="username" type="text">
-        <br>
-        <label for="password">Password</label>
-        <input id="password" name="password" type="password">
-        <br>
-        <input disabled id="submit" type="submit" value="Login">
-        <p>Belum punya akun ? Daftar <a href="register">disini</a></p>
-    </form>
-
-    <script>
-        const username = document.getElementById("username");
-        const password = document.getElementById("password");
-        const submit = document.getElementById("submit");
-
-        const input = document.getElementsByTagName("input");
-
-        for (let i = 0; i < input.length - 1; i++) {
-            input[i].onchange = () => {
-                if (password.value != "" && username.value != "") {
-                    submit.removeAttribute("disabled")
-                }
-            }
-        }
-    </script> -->
 </body>
 
 </html>

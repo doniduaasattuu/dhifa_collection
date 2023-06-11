@@ -62,57 +62,13 @@
                     <label for="phone_number" class="form-label -mb-5">Phone Number</label>
                     <input id="number" name="phone_number" type="phone_number" class="form-control" id="phone_number">
                 </div>
-                <!-- <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                </div> -->
+
                 <button type="submit" class="btn btn-primary">Sign Up</button>
                 <div id="emailHelp" class="form-text">Already have account ?, Login <a class="text-decoration-none" href="/login">here</a></div>
             </form>
         </div>
 
     </div>
-
-
-    <!-- <h1><?= $model["content"] ?></h1>
-    <form action="create_acount" method="POST">
-        <label for="username">Username</label>
-        <input id="username" name="username" type="text">
-        <br>
-        <label for="password">Password</label>
-        <input id="password" name="password" type="text">
-        <br>
-        <label for="fullname">Nama Lengkap</label>
-        <input id="fullname" name="fullname" type="text">
-        <br>
-        <label for="address">Alamat</label>
-        <input id="address" name="address" type="text">
-        <br>
-        <label for="phone_number">No Telp</label>
-        <input id="phone_number" name="phone_number" type="number">
-        <br>
-        <input disabled id="submit" type="submit" value="Daftar">
-        <br>
-        <p>Sudah punya akun ?, Login <a href="/login">disini</a></p>
-    </form>
-    <script>
-        const username = document.getElementById("username");
-        const password = document.getElementById("password");
-        const fullname = document.getElementById("fullname");
-        const address = document.getElementById("address");
-        const phone_number = document.getElementById("phone_number");
-        const submit = document.getElementById("submit");
-
-        const input = document.getElementsByTagName("input");
-
-        for (let i = 0; i < input.length - 1; i++) {
-            input[i].onchange = () => {
-                if (password.value != "" && username.value != "" && fullname.value != "" && address.value != "" && phone_number.value != "") {
-                    submit.removeAttribute("disabled")
-                }
-            }
-        }
-    </script> -->
 </body>
 
 </html>

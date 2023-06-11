@@ -163,48 +163,9 @@
     }
 </style>
 
-<body style="scrollbar-width: none;">
+<body>
 
     <?= $model["navbar"]; ?>
-
-    <!-- <nav class="sticky-top navbar navbar-expand-lg bg-body-tertiary zindex-fixed shadow-sm">
-        <div class="container py-2">
-            <a class="text-dark fw-medium me-xl-5 me-lg-3 navbar-brand" href="#">Dhifa Collection</a>
-            <button class="focus-ring navbar-toggler" style="--bs-focus-ring-width: 0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="mt-4 mt-lg-0 collapse navbar-collapse" id="navbarSupportedContent">
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-primary" type="submit">Search</button>
-                </form>
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item me-xl-5 me-lg-3">
-                        <a class="text-dark nav-link" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item me-xl-5 me-lg-3">
-                        <a class="text-dark nav-link" href="cart">Cart</a>
-                    </li>
-                    <li class="nav-item me-xl-5 me-lg-3">
-                        <a class="text-dark nav-link" href="/products">New arrival</a>
-                    </li>
-                    <li class="nav-item me-xl-5 me-lg-3">
-                        <a class="text-dark nav-link" href="#">Contact</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="text-dark nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Account
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="text-dark dropdown-item" href="#">Edit Account</a></li>
-                            <li><a class="text-light bg-danger dropdown-item" href="/logout">Logout</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav> -->
-
 
     <div id="myCarousel" class="carousel slide mb-0" data-bs-ride="carousel" data-bs-theme="light">
         <div class="carousel-indicators">
@@ -213,7 +174,6 @@
         </div>
         <div class="carousel-inner">
             <div style="background-image: url('img/womens.jpg'); background-size: cover;" class="carousel-item active">
-                <!-- <img class="img-fluid h-100" src="img/womens.jpg" alt="Women's wear"> -->
                 <div class="container">
                     <div class="carousel-caption text-end text-light ">
                         <h1>Women's collection.</h1>
@@ -224,7 +184,6 @@
             </div>
 
             <div style="background-image: url('img/mens.jpg'); background-size: cover;" class="carousel-item">
-                <!-- <img class="img-fluid" src="img/mens.jpg" alt="Men's wear"> -->
                 <div class="container">
                     <div class="carousel-caption text-end text-dark">
                         <h1>Men's collection.</h1>
@@ -250,7 +209,6 @@
         <div class="container">
             <h2>
                 Hello <?= $_SESSION["fullname"] ?>
-                Hello <?= $_SESSION["invoice"] ?>
             </h2>
 
             <!-- CARD WRAPPER -->
@@ -307,12 +265,6 @@
 
                 <p class="col-md-4 mb-0 text-body-secondary">&copy; 2023 Dhifa Collection, Inc</p>
 
-                <!-- <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-                    <svg class="bi me-2" width="40" height="32">
-                        <use xlink:href="#bootstrap" />
-                    </svg>
-                </a> -->
-
                 <ul class="nav col-md-4 justify-content-end">
                     <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li>
                     <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Cart</a></li>
@@ -332,18 +284,18 @@
         for (let i = 0; i < button.length; i++) {
             button[i].onclick = () => {
 
-                let id = button[i].getAttribute("product_id");
+                let product_id = button[i].getAttribute("product_id");
                 let price = button[i].getAttribute("price");
-                // let qty = button[i].getAttribute("qty");
-                // let amount = button[i].getAttribute("amount");
 
                 const ajax = new XMLHttpRequest();
+
                 ajax.open("POST", "add_to_cart");
+
                 ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
-                ajax.send(`id=${id}&price=${price}`);
+                ajax.send(`product_id=${product_id}&price=${price}`);
 
-                alert(button[i].getAttribute("product_name") + " added to cart")
+                alert(button[i].getAttribute("product_name") + " added to cart");
             }
         }
     </script>

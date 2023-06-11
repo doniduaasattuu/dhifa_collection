@@ -4,13 +4,13 @@ Entity users {
     * email: VARCHAR(30) <<PK>>
     --
     * password: VARCHAR(30)
-    * fullname: VARHCAR(50)
-    * address: VARHCAR(50)
+    * fullname: VARHCAR(100)
+    * address: VARHCAR(200)
     * phone_number: VARHCAR(50)
 }
 
 Entity products {
-    * id_product: INT(11) <<PK>>
+    * id_product: INT(11) AI <<PK>>
     --
     * name: VARCHAR(100)
     * price: BIGINT
@@ -18,22 +18,24 @@ Entity products {
 }
 
 Entity orders {
-    * id_order: INT(11) <<PK>>
+    * order_id: VARCHAR(50) <<PK>> <<FK>>
     --
-    * email: VARCHAR(30) <<FK>>
+    * email: VARCHAR(30) <<PK>> <<FK>>
     * total: BIGINT
-    * order_date: DATE
+    * status: ENUM("Open", "Close")
 }
 
 Entity order_detail {
     * id_order: INT(11) <<PK>>
     --
-    * email: VARCHAR(30) <<FK>>
-    * id_product: INT(11) <<FK>>
+    * product_id: INT(11) <<FK>>
+    * price: INT(11)
+    * qty: INT(11)
+    * amount: INT(11)
 }
 
 users |o--o{ orders: memiliki
 orders ||--o{ order_detail: memiliki
-order_detail ||--|| products
+order_detail ||--|{ products: memiliki
 
 @enduml
