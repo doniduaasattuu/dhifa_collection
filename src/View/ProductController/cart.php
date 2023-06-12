@@ -85,7 +85,15 @@
                         <hr>
                         <p class="card-text"><span class="fw-bold">Shipping address</span> : <?= $_SESSION["address"] ?></p>
                         <hr>
-                        <a href="#" class="btn btn-primary">Checkout</a>
+                        <div class="d-flex justify-content-between">
+                            <a href="#" class="btn btn-primary">Checkout</a>
+                            <select class="ms-4 form-select" aria-label="Default select example">
+                                <option selected>Payment method</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>

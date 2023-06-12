@@ -1,0 +1,2 @@
+dbname : dhifa_collection
+passwd : @Donida2104
