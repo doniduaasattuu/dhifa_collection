@@ -5,6 +5,7 @@ namespace Donid\DhifaCollection\Controller;
 use Donid\DhifaCollection\App\View;
 use Donid\DhifaCollection\Helper\Database;
 use Donid\DhifaCollection\View\Navbar;
+use Donid\DhifaCollection\View\Footer;
 
 class HomeController
 {
@@ -21,8 +22,9 @@ class HomeController
         $model = [
             "title" => "Dhifa Collection",
             "content" => "Dhifa Collection",
+            "products" => $products,
             "navbar" => Navbar::get_navbar(),
-            "products" => $products
+            "footer" => Footer::get_footer()
         ];
 
         View::render("HomeController/home", $model);
