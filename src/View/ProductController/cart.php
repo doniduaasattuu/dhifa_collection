@@ -43,7 +43,7 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Name</th>
+                    <th scope="col">Product Name</th>
                     <th scope="col">Price</th>
                     <th scope="col">Quantity</th>
                     <th scope="col">Amount</th>
@@ -81,18 +81,18 @@
                 <div class="ms-auto card" id="shopping_summary">
                     <div class=" card-body">
                         <h5 class="fw-bold mb-3 card-title">Shopping summary</h5>
-                        <p class="pt-3 border-top card-text"><span class=" fw-bold">Total amount</span> : IDR <span class="total_amount">0</span>K</p>
+                        <p class="pt-3 border-top card-text"><span class=" fw-bold">Total price</span> : IDR <span class="total_amount">0</span>K</p>
                         <hr>
                         <p class="card-text"><span class="fw-bold">Shipping address</span> : <?= $_SESSION["address"] ?></p>
                         <hr>
-                        <div class="d-flex justify-content-between">
-                            <a href="#" class="btn btn-primary">Checkout</a>
-                            <select class="ms-4 form-select" aria-label="Default select example">
+                        <div class="d-sm-flex d-block justify-content-between">
+                            <select class="me-sm-4 form-select" aria-label="Default select example">
                                 <option selected>Payment method</option>
                                 <option value="1">One</option>
                                 <option value="2">Two</option>
                                 <option value="3">Three</option>
                             </select>
+                            <a href="#" class="float-end mt-sm-0 mt-3 btn btn-primary">Checkout</a>
                         </div>
                     </div>
                 </div>
