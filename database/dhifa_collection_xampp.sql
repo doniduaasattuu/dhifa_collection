@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 11, 2023 at 05:28 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Jun 14, 2023 at 09:38 AM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,6 +31,8 @@ CREATE TABLE `orders` (
   `order_id` varchar(50) NOT NULL,
   `email` varchar(30) NOT NULL,
   `order_date` date NOT NULL DEFAULT current_timestamp(),
+  `total_payment` bigint(20) NOT NULL DEFAULT 0,
+  `resi` varchar(50) DEFAULT NULL,
   `status` enum('Open','Close') NOT NULL DEFAULT 'Open'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -38,8 +40,8 @@ CREATE TABLE `orders` (
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`order_id`, `email`, `order_date`, `status`) VALUES
-('INV/20230611/2223', 'doni@gmail.com', '2023-06-11', 'Open');
+INSERT INTO `orders` (`order_id`, `email`, `order_date`, `total_payment`, `resi`, `status`) VALUES
+('INV/20230614/1331', 'doni@gmail.com', '2023-06-14', 505, NULL, 'Open');
 
 -- --------------------------------------------------------
 
@@ -61,9 +63,9 @@ CREATE TABLE `order_detail` (
 --
 
 INSERT INTO `order_detail` (`id`, `order_id`, `product_id`, `price`, `qty`, `amount`) VALUES
-(7, 'INV/20230611/2223', 1, 120, 1, 120),
-(8, 'INV/20230611/2223', 2, 110, 2, 220),
-(9, 'INV/20230611/2223', 3, 150, 3, 450);
+(20, 'INV/20230614/1331', 4, 165, 1, 165),
+(21, 'INV/20230614/1331', 6, 155, 1, 155),
+(22, 'INV/20230614/1331', 5, 135, 1, 135);
 
 -- --------------------------------------------------------
 
@@ -151,7 +153,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `order_detail`
 --
 ALTER TABLE `order_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `products`

@@ -196,9 +196,27 @@ class ProductController
         }
     }
 
+    public function total_payment()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+            $total_payment = (int) $_POST["total_payment"];
+            $invoice = $_POST["invoice"];
+
+            // echo $total_payment . "</br>" . $invoice;
+
+            $sql = "UPDATE orders SET total_payment = $total_payment WHERE order_id = '$invoice' AND status = 'Open';";
+
+            $connection = Database::get_connection();
+            $connection->query($sql);
+
+            $connection = null;
+        }
+    }
+
     public function clean_basket()
     {
-        if ($_SERVER["REQUEST_METHOD"] = "POST") {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             $email = $_SESSION["email"];
 

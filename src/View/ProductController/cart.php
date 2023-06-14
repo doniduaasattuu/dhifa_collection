@@ -44,7 +44,7 @@
                     ?>'s Cart</h2>
             </div>
             <div>
-                <span><?= $model["invoice"] ?></span>
+                <span class="invoice"><?= $model["invoice"] ?></span>
             </div>
         </div>
 
@@ -90,7 +90,10 @@
                 <div class="ms-auto card" id="shopping_summary">
                     <div class=" card-body">
 
-                        <h5 class="fw-bold card-title">Cart details</h5>
+                        <h5 class="fw-bold card-title mb-0">Cart details</h5>
+                        <!-- <div class="d-flex justify-content-between align-items-baseline">
+                            <button class="btn btn-primary">Verified</button>
+                        </div> -->
                         <hr>
 
                         <!-- TOTAL AMOUNT {PRICE} -->
@@ -102,7 +105,7 @@
                         <!-- SHIPPING ADDRESS -->
                         <p class="card-text">
                         <h6 class="fw-bold">Shipping address</h6>
-                        IDR <span class="shipping_address"><?= $_SESSION["address"] ?></span></p>
+                        <span class="shipping_address text-secondary"><?= $_SESSION["address"] ?></span></p>
 
                         <!-- SHIPPING PRICE -->
                         <h6 class="fw-bold">Shipping price</h6>
@@ -116,12 +119,13 @@
                         <hr>
 
                         <div class="d-sm-flex d-block justify-content-between">
-                            <select class="me-sm-4 form-select" aria-label="Default select example">
+                            <select class="payment_method me-sm-4 form-select" aria-label="Default select example">
                                 <option selected>Payment method</option>
-                                <option value="1">ATM Transfer</option>
-                                <option value="2">BRIVA</option>
+                                <option value="ATM Transfer">ATM Transfer</option>
+                                <option value="BRIVA">BRIVA</option>
                             </select>
-                            <a href="#" class="checkout float-end mt-sm-0 mt-3 btn btn-primary">Checkout</a>
+                            <!-- <a href="#" class="checkout float-end mt-sm-0 mt-3 btn btn-primary">Checkout</a> -->
+                            <button class="checkout float-end mt-sm-0 mt-3 btn btn-primary">Checkout</button>
                         </div>
                     </div>
                 </div>
@@ -146,6 +150,11 @@
         const total_amount = document.getElementsByClassName("total_amount")[0];
         const total_payment = document.getElementsByClassName("total_payment")[0];
         const shipping_price = document.getElementsByClassName("shipping_price")[0];
+
+        const invoice = document.getElementsByClassName("invoice")[0];
+
+        const checkout = document.getElementsByClassName("checkout")[0];
+        const payment_method = document.getElementsByClassName("payment_method")[0];
 
 
         // PENGURANGAN KUANTITI
@@ -225,12 +234,12 @@
         // SUM TOTAL PAYMMENT
         function sum_total_payment() {
 
-            // console.log(total_amount.textContent);
-            // console.log(shipping_price.textContent);
+            xhr = new XMLHttpRequest()
+            xhr.open("POST", "total_payment");
 
-            // console.log(Number(total_amount.textContent) + Number(shipping_price.textContent));
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
-            // console.log(total_payment.textContent);
+            xhr.send(`total_payment=${Number(total_amount.textContent) + Number(shipping_price.textContent)}&invoice=${invoice.textContent}`)
 
             total_payment.textContent = Number(total_amount.textContent) + Number(shipping_price.textContent);
 
@@ -262,6 +271,25 @@
 
                 alert("Basket was cleaned!")
                 location.reload();
+            }
+        }
+
+
+        // ====================
+        // CHECKOUT
+        // ====================
+
+        checkout.onclick = () => {
+            if (payment_method.value == "Payment method") {
+                alert("Select payment method first!")
+            } else {
+                if (payment_method.value == "ATM Transfer") {
+                    console.info("POST ATMTransfer");
+                } else if (payment_method.value == "BRIVA") {
+                    console.info("POST BRIVA");
+                } else {
+                    console.info("Tidak diketahui")
+                }
             }
         }
     </script>
