@@ -31,4 +31,6 @@ Router::add("POST", "/add_to_cart", ProductController::class, "add_to_cart", [Au
 Router::add("POST", "/clean_basket", ProductController::class, "clean_basket", [AuthMiddleware::class]);
 Router::add("POST", "/update_cart_quantity", ProductController::class, "update_cart_quantity", [AuthMiddleware::class]);
 
+Router::add("POST", "/checkout", ProductController::class, "checkout", [AuthMiddleware::class]);
+
 Router::run();

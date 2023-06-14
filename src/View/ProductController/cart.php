@@ -24,6 +24,10 @@
             margin-bottom: 1rem;
             width: 100%;
         }
+
+        .checkout {
+            width: 100%;
+        }
     }
 </style>
 
@@ -31,22 +35,27 @@
 
     <?= $model["navbar"] ?>
 
-    <div class="container vh-100 py-5">
-        <div class="container-fluid d-flex justify-content-between">
-            <h1><?php
-                $firstname = explode(" ", $_SESSION["fullname"]);
-                echo $firstname[0];
-                ?>'s Cart</h1>
+    <div class="container py-5">
+        <div class="m-1 d-flex justify-content-between align-items-baseline">
+            <div>
+                <h2><?php
+                    $firstname = explode(" ", $_SESSION["fullname"]);
+                    echo $firstname[0];
+                    ?>'s Cart</h2>
+            </div>
+            <div>
+                <span><?= $model["invoice"] ?></span>
+            </div>
         </div>
 
         <table class="table my-3">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Product Name</th>
+                    <th class="count-product" scope="col">#</th>
+                    <th scope="col">Name</th>
                     <th scope="col">Price</th>
                     <th scope="col">Quantity</th>
-                    <th scope="col">Amount</th>
+                    <th scope="col">Subtotal</th>
                 </tr>
             </thead>
             <tbody>
@@ -56,14 +65,14 @@
                 foreach ($model["cart"] as $cart) {
                 ?>
                     <tr>
-                        <th class="align-middle" scope="row"><?php echo $count ?></th>
+                        <th class="count-product align-middle" scope="row"><?php echo $count ?></th>
                         <td class="align-middle"><?php echo $cart["name"]; ?></td>
-                        <td class="price align-middle"><?php echo $cart["price"]; ?>K</td>
+                        <td class="align-middle"><span class="price"><?php echo $cart["price"]; ?></span>K</td>
                         <td class="align-middle">
                             <button product_id="<?php echo $cart["product_id"] ?>" class="button_decrement btn btn-outline-primary btn-sm me-1">-</button>
                             <span class="text-center align-middle" style="width: 25px;" class="d-sm-inline-block"><?php echo $cart["qty"]; ?></span>
                             <button product_id="<?php echo $cart["product_id"] ?>" class="button_increment btn btn-outline-primary btn-sm ms-1">+</button>
-                        <td class="amount align-middle"><?php echo $cart["amount"]; ?>K</td>
+                        <td class="align-middle"><span class="amount"><?php echo $cart["amount"]; ?></span>K</td>
                     </tr>
                 <?php
                     $count++;
@@ -80,19 +89,39 @@
             <div class="col-sm">
                 <div class="ms-auto card" id="shopping_summary">
                     <div class=" card-body">
-                        <h5 class="fw-bold mb-3 card-title">Shopping summary</h5>
-                        <p class="pt-3 border-top card-text"><span class=" fw-bold">Total price</span> : IDR <span class="total_amount">0</span>K</p>
+
+                        <h5 class="fw-bold card-title">Cart details</h5>
                         <hr>
-                        <p class="card-text"><span class="fw-bold">Shipping address</span> : <?= $_SESSION["address"] ?></p>
+
+                        <!-- TOTAL AMOUNT {PRICE} -->
+                        <p class="card-text">
+                        <h6 class="fw-bold">Total price (<?= $count - 1 ?> items)</h6>
+                        IDR <span class="total_amount">0</span>K</p>
                         <hr>
+
+                        <!-- SHIPPING ADDRESS -->
+                        <p class="card-text">
+                        <h6 class="fw-bold">Shipping address</h6>
+                        IDR <span class="shipping_address"><?= $_SESSION["address"] ?></span></p>
+
+                        <!-- SHIPPING PRICE -->
+                        <h6 class="fw-bold">Shipping price</h6>
+                        IDR <span class="shipping_price">50</span>K</p>
+                        <hr>
+
+                        <!-- TOTAL PAYMENT -->
+                        <p class="card-text">
+                        <h6 class="fw-bold">Total payment</h6>
+                        IDR <span class="total_payment">500</span>K</p>
+                        <hr>
+
                         <div class="d-sm-flex d-block justify-content-between">
                             <select class="me-sm-4 form-select" aria-label="Default select example">
                                 <option selected>Payment method</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                <option value="1">ATM Transfer</option>
+                                <option value="2">BRIVA</option>
                             </select>
-                            <a href="#" class="float-end mt-sm-0 mt-3 btn btn-primary">Checkout</a>
+                            <a href="#" class="checkout float-end mt-sm-0 mt-3 btn btn-primary">Checkout</a>
                         </div>
                     </div>
                 </div>
@@ -100,6 +129,12 @@
         </div>
     </div>
 
+
+    <?php
+
+    echo $model["footer"];
+
+    ?>
 
     <script>
         const button_decrement = document.getElementsByClassName("button_decrement");
@@ -109,6 +144,9 @@
         const amount = document.getElementsByClassName("amount");
 
         const total_amount = document.getElementsByClassName("total_amount")[0];
+        const total_payment = document.getElementsByClassName("total_payment")[0];
+        const shipping_price = document.getElementsByClassName("shipping_price")[0];
+
 
         // PENGURANGAN KUANTITI
         for (let i = 0; i < button_decrement.length; i++) {
@@ -119,10 +157,11 @@
                     let text_content = Number(button_decrement[i].nextElementSibling.textContent) - 1;
                     button_decrement[i].nextElementSibling.textContent = text_content;
 
-                    let amount_update = Number(button_decrement[i].nextElementSibling.textContent) * Number(price[i].textContent.replace("K", ""))
-                    amount[i].textContent = amount_update + "K";
+                    let amount_update = Number(button_decrement[i].nextElementSibling.textContent) * Number(price[i].textContent)
+                    amount[i].textContent = amount_update;
 
                     sum_total_amount();
+                    sum_total_payment();
 
                     // =======================================
                     // UPDATE KUANTITI KE DATABASE MELALUI API
@@ -141,10 +180,11 @@
                 let text_content = Number(button_increment[i].previousElementSibling.textContent) + 1;
                 button_increment[i].previousElementSibling.textContent = text_content;
 
-                let amount_update = Number(button_increment[i].previousElementSibling.textContent) * Number(price[i].textContent.replace("K", ""))
-                amount[i].textContent = amount_update + "K";
+                let amount_update = Number(button_increment[i].previousElementSibling.textContent) * Number(price[i].textContent)
+                amount[i].textContent = amount_update;
 
                 sum_total_amount();
+                sum_total_payment();
 
                 // =======================================
                 // UPDATE KUANTITI KE DATABASE MELALUI API
@@ -170,19 +210,37 @@
 
         // SUM AMOUNT AS TOTAL AMOUNT
         function sum_total_amount() {
+
             let temp = 0;
             for (let i = 0; i < amount.length; i++) {
 
-                let amount_temp = Number(amount[i].textContent.replace("K", ""));
+                let amount_temp = Number(amount[i].textContent);
                 temp = temp + amount_temp;
+
                 total_amount.textContent = temp;
 
             }
         }
 
+        // SUM TOTAL PAYMMENT
+        function sum_total_payment() {
+
+            // console.log(total_amount.textContent);
+            // console.log(shipping_price.textContent);
+
+            // console.log(Number(total_amount.textContent) + Number(shipping_price.textContent));
+
+            // console.log(total_payment.textContent);
+
+            total_payment.textContent = Number(total_amount.textContent) + Number(shipping_price.textContent);
+
+        };
+
         // WINDOW ON LOAD
         window.onload = () => {
+
             sum_total_amount();
+            sum_total_payment();
         }
 
         // =================================

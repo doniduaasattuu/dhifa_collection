@@ -8,7 +8,7 @@ class Navbar
     public static function get_navbar(): string
     {
 
-        return  <<<NAVBAR
+        return <<<NAVBAR
         <nav class="sticky-top navbar navbar-expand-lg bg-body-tertiary zindex-fixed shadow-sm">
             <div class="container py-2">
                 <a class="text-dark fw-medium me-xl-5 me-lg-3 navbar-brand" href="#">Dhifa Collection</a>
@@ -28,7 +28,7 @@ class Navbar
                             <a class="text-dark nav-link" href="cart">Cart</a>
                         </li>
                         <li class="nav-item me-xl-5 me-lg-3">
-                            <a class="text-dark nav-link" href="/products">New arrival</a>
+                            <a class="text-dark nav-link" href="#">New arrival</a>
                         </li>
                         <li class="nav-item me-xl-5 me-lg-3">
                             <a class="text-dark nav-link" href="#">Contact</a>

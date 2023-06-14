@@ -218,6 +218,8 @@
 
                 <?php
 
+                use Donid\DhifaCollection\View\Footer;
+
                 foreach ($model["products"] as $product) {
                 ?>
                     <!-- CARD START -->
@@ -259,7 +261,7 @@
     <!-- CAROUSEL END -->
 
     <!-- FOOTER START -->
-    <div class="border-top">
+    <!-- <div class="border-top">
         <div class="container">
             <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 ">
 
@@ -274,8 +276,10 @@
 
             </footer>
         </div>
-    </div>
+    </div> -->
     <!-- FOOTER END -->
+
+    <?= Footer::get_footer(); ?>
 
 
     <script>

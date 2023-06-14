@@ -5,6 +5,7 @@ namespace Donid\DhifaCollection\Controller;
 use Donid\DhifaCollection\Helper\Database;
 use Donid\DhifaCollection\App\View;
 use Donid\DhifaCollection\View\Navbar;
+use Donid\DhifaCollection\View\Footer;
 
 class ProductController
 {
@@ -13,24 +14,25 @@ class ProductController
         header("location: $path");
     }
 
-    public function products()
-    {
-        $connection = Database::get_connection();
-        $sql = "SELECT * FROM products ORDER BY product_id";
-        $statement = $connection->prepare($sql);
-        $statement->execute();
+    // public function products()
+    // {
+    //     $connection = Database::get_connection();
+    //     $sql = "SELECT * FROM products ORDER BY product_id";
+    //     $statement = $connection->prepare($sql);
+    //     $statement->execute();
 
-        $model = [
-            "title" => "Products",
-            "content" => "Our Products",
-            "navbar" => Navbar::get_navbar(),
-            "statement" => $statement
-        ];
+    //     $model = [
+    //         "title" => "Products",
+    //         "content" => "Our Products",
+    //         "navbar" => Navbar::get_navbar(),
+    //         "footer" => Footer::get_footer(),
+    //         "statement" => $statement
+    //     ];
 
-        View::render("ProductController/show_products", $model);
+    //     View::render("ProductController/show_products", $model);
 
-        $connection = null;
-    }
+    //     $connection = null;
+    // }
 
     public function cart()
     {
@@ -64,7 +66,9 @@ class ProductController
                     "title" => "Cart",
                     "content" => "Your cart",
                     "navbar" => Navbar::get_navbar(),
-                    "cart" => $result
+                    "footer" => Footer::get_footer(),
+                    "cart" => $result,
+                    "invoice" => $invoice
                 ];
 
                 View::render("ProductController/cart", $model);
@@ -72,7 +76,8 @@ class ProductController
 
                 $model = [
                     "title" => "Empty Cart",
-                    "navbar" => Navbar::get_navbar()
+                    "navbar" => Navbar::get_navbar(),
+                    "footer" => Footer::get_footer()
                 ];
 
                 View::render("ProductController/empty_cart", $model);
@@ -186,7 +191,7 @@ class ProductController
                     $connection = null;
                 }
 
-                $connection->query($sql);
+                $connection = null;
             }
         }
     }
