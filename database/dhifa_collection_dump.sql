@@ -1,8 +1,8 @@
--- MariaDB dump 10.19  Distrib 10.4.27-MariaDB, for Win64 (AMD64)
+-- MariaDB dump 10.19  Distrib 10.4.28-MariaDB, for Win64 (AMD64)
 --
 -- Host: localhost    Database: dhifa_collection
 -- ------------------------------------------------------
--- Server version	10.4.27-MariaDB
+-- Server version	10.4.28-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -35,7 +35,7 @@ CREATE TABLE `order_detail` (
   CONSTRAINT `fk_order_detail_to_orders` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`),
   CONSTRAINT `fk_order_detail_to_products` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`),
   CONSTRAINT `fk_order_id_to_orders` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,7 +44,7 @@ CREATE TABLE `order_detail` (
 
 LOCK TABLES `order_detail` WRITE;
 /*!40000 ALTER TABLE `order_detail` DISABLE KEYS */;
-INSERT INTO `order_detail` VALUES (20,'INV/20230614/1331',4,165,1,165),(21,'INV/20230614/1331',6,155,1,155),(22,'INV/20230614/1331',5,135,1,135);
+INSERT INTO `order_detail` VALUES (1,'INV/20230615/1712',1,120,1,120),(2,'INV/20230615/1712',7,170,2,340),(3,'INV/20230615/1712',8,155,3,465);
 /*!40000 ALTER TABLE `order_detail` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -74,7 +74,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES ('INV/20230614/1331','doni@gmail.com','2023-06-14',505,NULL,'Open');
+INSERT INTO `orders` VALUES ('INV/20230615/1712','doni@gmail.com','2023-06-15',975,NULL,'Open');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -91,7 +91,7 @@ CREATE TABLE `products` (
   `price` bigint(20) NOT NULL,
   `qty` int(11) NOT NULL,
   PRIMARY KEY (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -100,7 +100,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,'Pepe Jeans',120,10),(2,'The Run',110,10),(3,'Style Vesture',150,10),(4,'Sweet Rose',165,10),(5,'Frock Works',135,10),(6,'Honey Punch',155,10);
+INSERT INTO `products` VALUES (1,'Pepe Jeans',120,10),(2,'The Run',110,10),(3,'Style Vesture',150,10),(4,'Sweet Rose',165,10),(5,'Frock Works',135,10),(6,'Honey Punch',155,10),(7,'Nighty Nine',170,10),(8,'The Goodly',155,10),(9,'Fine Touch',145,10),(10,'Simply Seattle',180,10),(11,'Seemly Garb',125,10),(12,'Style Wear',170,10);
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -140,4 +140,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-14 14:39:16
+-- Dump completed on 2023-06-16  6:39:22
