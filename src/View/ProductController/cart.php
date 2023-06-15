@@ -134,10 +134,30 @@
     </div>
 
 
+    <div class="container mb-5 ">
+        <div class=" border border-1 rounded">
+            <div class="p-3">
+                <div><?= $_SESSION["invoice"] ?></div>
+                <div class="container">
+                    <div class="py-3 col">
+                        <h6>Payment method</h6>
+                        <span>ATM Transfer</span>
+                        <span>044401014051501</span>
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-success">Upload Payment Receipt</button>
+                        <button class="btn btn-success">Upload Payment Receipt</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+    <!-- FOOTER -->
     <?php
-
     echo $model["footer"];
-
     ?>
 
     <script>
@@ -250,6 +270,12 @@
 
             sum_total_amount();
             sum_total_payment();
+
+            let MyArray = ["Doni", "Darmawan"];
+            let NewArray = new Array("Doni", "Darmawan");
+
+            console.info(MyArray)
+            console.info(NewArray)
         }
 
         // =================================
@@ -284,9 +310,9 @@
                 alert("Select payment method first!")
             } else {
                 if (payment_method.value == "ATM Transfer") {
-                    console.info("POST ATMTransfer");
+                    alert("POST ATMTransfer");
                 } else if (payment_method.value == "BRIVA") {
-                    console.info("POST BRIVA");
+                    alert("POST BRIVA");
                 } else {
                     console.info("Tidak diketahui")
                 }
