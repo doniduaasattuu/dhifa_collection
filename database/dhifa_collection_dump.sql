@@ -35,7 +35,7 @@ CREATE TABLE `order_detail` (
   CONSTRAINT `fk_order_detail_to_orders` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`),
   CONSTRAINT `fk_order_detail_to_products` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`),
   CONSTRAINT `fk_order_id_to_orders` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,7 +44,7 @@ CREATE TABLE `order_detail` (
 
 LOCK TABLES `order_detail` WRITE;
 /*!40000 ALTER TABLE `order_detail` DISABLE KEYS */;
-INSERT INTO `order_detail` VALUES (1,'INV/20230615/1712',1,120,1,120),(2,'INV/20230615/1712',7,170,2,340),(3,'INV/20230615/1712',8,155,3,465);
+INSERT INTO `order_detail` VALUES (14,'INV/20230617/0907',2,110,2,220),(15,'INV/20230617/0907',3,150,2,300);
 /*!40000 ALTER TABLE `order_detail` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -60,8 +60,7 @@ CREATE TABLE `orders` (
   `email` varchar(30) NOT NULL,
   `order_date` date NOT NULL DEFAULT current_timestamp(),
   `total_payment` bigint(20) NOT NULL DEFAULT 0,
-  `resi` varchar(50) DEFAULT NULL,
-  `status` enum('Open','Close') NOT NULL DEFAULT 'Open',
+  `status` enum('Open','Checkout','Verified','Close') NOT NULL DEFAULT 'Open',
   PRIMARY KEY (`order_id`),
   KEY `fk_orders_to_users_email` (`email`),
   CONSTRAINT `fk_orders_to_users_email` FOREIGN KEY (`email`) REFERENCES `users` (`email`)
@@ -74,7 +73,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES ('INV/20230615/1712','doni@gmail.com','2023-06-15',975,NULL,'Open');
+INSERT INTO `orders` VALUES ('INV/20230617/0907','doni@gmail.com','2023-06-17',570,'Verified');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -140,4 +139,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-16  6:39:22
+-- Dump completed on 2023-06-17 23:22:38

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 14, 2023 at 09:38 AM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.2.0
+-- Generation Time: Jun 17, 2023 at 06:20 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -32,16 +32,15 @@ CREATE TABLE `orders` (
   `email` varchar(30) NOT NULL,
   `order_date` date NOT NULL DEFAULT current_timestamp(),
   `total_payment` bigint(20) NOT NULL DEFAULT 0,
-  `resi` varchar(50) DEFAULT NULL,
-  `status` enum('Open','Close') NOT NULL DEFAULT 'Open'
+  `status` enum('Open','Checkout','Verified','Close') NOT NULL DEFAULT 'Open'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`order_id`, `email`, `order_date`, `total_payment`, `resi`, `status`) VALUES
-('INV/20230614/1331', 'doni@gmail.com', '2023-06-14', 505, NULL, 'Open');
+INSERT INTO `orders` (`order_id`, `email`, `order_date`, `total_payment`, `status`) VALUES
+('INV/20230617/0907', 'doni@gmail.com', '2023-06-17', 570, 'Verified');
 
 -- --------------------------------------------------------
 
@@ -63,9 +62,8 @@ CREATE TABLE `order_detail` (
 --
 
 INSERT INTO `order_detail` (`id`, `order_id`, `product_id`, `price`, `qty`, `amount`) VALUES
-(20, 'INV/20230614/1331', 4, 165, 1, 165),
-(21, 'INV/20230614/1331', 6, 155, 1, 155),
-(22, 'INV/20230614/1331', 5, 135, 1, 135);
+(14, 'INV/20230617/0907', 2, 110, 2, 220),
+(15, 'INV/20230617/0907', 3, 150, 2, 300);
 
 -- --------------------------------------------------------
 
@@ -90,7 +88,13 @@ INSERT INTO `products` (`product_id`, `name`, `price`, `qty`) VALUES
 (3, 'Style Vesture', 150, 10),
 (4, 'Sweet Rose', 165, 10),
 (5, 'Frock Works', 135, 10),
-(6, 'Honey Punch', 155, 10);
+(6, 'Honey Punch', 155, 10),
+(7, 'Nighty Nine', 170, 10),
+(8, 'The Goodly', 155, 10),
+(9, 'Fine Touch', 145, 10),
+(10, 'Simply Seattle', 180, 10),
+(11, 'Seemly Garb', 125, 10),
+(12, 'Style Wear', 170, 10);
 
 -- --------------------------------------------------------
 
@@ -153,13 +157,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `order_detail`
 --
 ALTER TABLE `order_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables
