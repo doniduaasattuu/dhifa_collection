@@ -35,7 +35,7 @@ CREATE TABLE `order_detail` (
   CONSTRAINT `fk_order_detail_to_orders` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`),
   CONSTRAINT `fk_order_detail_to_products` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`),
   CONSTRAINT `fk_order_id_to_orders` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,7 +44,6 @@ CREATE TABLE `order_detail` (
 
 LOCK TABLES `order_detail` WRITE;
 /*!40000 ALTER TABLE `order_detail` DISABLE KEYS */;
-INSERT INTO `order_detail` VALUES (14,'INV/20230617/0907',2,110,2,220),(15,'INV/20230617/0907',3,150,2,300);
 /*!40000 ALTER TABLE `order_detail` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -73,7 +72,6 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES ('INV/20230617/0907','doni@gmail.com','2023-06-17',570,'Verified');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -99,7 +97,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,'Pepe Jeans',120,10),(2,'The Run',110,10),(3,'Style Vesture',150,10),(4,'Sweet Rose',165,10),(5,'Frock Works',135,10),(6,'Honey Punch',155,10),(7,'Nighty Nine',170,10),(8,'The Goodly',155,10),(9,'Fine Touch',145,10),(10,'Simply Seattle',180,10),(11,'Seemly Garb',125,10),(12,'Style Wear',170,10);
+INSERT INTO `products` VALUES (1,'Pepe Jeans',120,100),(2,'The Run',110,100),(3,'Style Vesture',150,100),(4,'Sweet Rose',165,100),(5,'Frock Works',135,100),(6,'Honey Punch',155,100),(7,'Nighty Nine',170,100),(8,'The Goodly',155,100),(9,'Fine Touch',145,100),(10,'Simply Seattle',180,100),(11,'Seemly Garb',125,100),(12,'Style Wear',170,100);
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -139,4 +137,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-17 23:22:38
+-- Dump completed on 2023-06-18 14:55:34

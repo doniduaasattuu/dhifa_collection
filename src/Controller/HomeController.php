@@ -12,6 +12,8 @@ class HomeController
 
     public function home()
     {
+        $email = $_SESSION["email"];
+
         $connection = Database::get_connection();
         $sql = "SELECT product_id, name, price FROM products";
         $statement = $connection->prepare($sql);

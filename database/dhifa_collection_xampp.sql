@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 17, 2023 at 06:20 PM
+-- Generation Time: Jun 18, 2023 at 09:54 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -35,13 +35,6 @@ CREATE TABLE `orders` (
   `status` enum('Open','Checkout','Verified','Close') NOT NULL DEFAULT 'Open'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `orders`
---
-
-INSERT INTO `orders` (`order_id`, `email`, `order_date`, `total_payment`, `status`) VALUES
-('INV/20230617/0907', 'doni@gmail.com', '2023-06-17', 570, 'Verified');
-
 -- --------------------------------------------------------
 
 --
@@ -56,14 +49,6 @@ CREATE TABLE `order_detail` (
   `qty` int(11) NOT NULL DEFAULT 1,
   `amount` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `order_detail`
---
-
-INSERT INTO `order_detail` (`id`, `order_id`, `product_id`, `price`, `qty`, `amount`) VALUES
-(14, 'INV/20230617/0907', 2, 110, 2, 220),
-(15, 'INV/20230617/0907', 3, 150, 2, 300);
 
 -- --------------------------------------------------------
 
@@ -83,18 +68,18 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`product_id`, `name`, `price`, `qty`) VALUES
-(1, 'Pepe Jeans', 120, 10),
-(2, 'The Run', 110, 10),
-(3, 'Style Vesture', 150, 10),
-(4, 'Sweet Rose', 165, 10),
-(5, 'Frock Works', 135, 10),
-(6, 'Honey Punch', 155, 10),
-(7, 'Nighty Nine', 170, 10),
-(8, 'The Goodly', 155, 10),
-(9, 'Fine Touch', 145, 10),
-(10, 'Simply Seattle', 180, 10),
-(11, 'Seemly Garb', 125, 10),
-(12, 'Style Wear', 170, 10);
+(1, 'Pepe Jeans', 120, 100),
+(2, 'The Run', 110, 100),
+(3, 'Style Vesture', 150, 100),
+(4, 'Sweet Rose', 165, 100),
+(5, 'Frock Works', 135, 100),
+(6, 'Honey Punch', 155, 100),
+(7, 'Nighty Nine', 170, 100),
+(8, 'The Goodly', 155, 100),
+(9, 'Fine Touch', 145, 100),
+(10, 'Simply Seattle', 180, 100),
+(11, 'Seemly Garb', 125, 100),
+(12, 'Style Wear', 170, 100);
 
 -- --------------------------------------------------------
 
@@ -157,7 +142,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `order_detail`
 --
 ALTER TABLE `order_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `products`

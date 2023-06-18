@@ -59,7 +59,7 @@
             <div class="p-3">
                 <div>
                     <div class="d-flex justify-content-between">
-                        <p><?= $_SESSION["invoice"] ?></p>
+                        <p id="invoice"><?= $model["invoice"] ?></p>
                         <?php
                         if (isset($model["verified"])) {
                             $status = <<<STATUS
@@ -79,7 +79,7 @@
                 <form method="POST" action="upload_resi" enctype="multipart/form-data">
                     <div class="form-group">
                         <label class="mb-2" for="payment_receipt">Upload payment receipt</label>
-                        <input type="file" class="d-inline-block form-control-file" name="payment_receipt" id="payment_receipt">
+                        <input type="file" class="d-inline-block form-control-file" name="payment_receipt" id="payment_receipt" accept="image/*">
                     </div>
                     <input disabled id="upload_button" class="w-100 my-3 btn btn-primary" type="submit" value="Upload">
                 </form>
@@ -119,23 +119,18 @@
         // =================================
         // CLEAN BASKET FUNCTION 
         // =================================
-        const cancel_order_button = document.getElementById("cancel_order");
 
+        const invoice = document.getElementById("invoice").textContent;
+
+        const cancel_order_button = document.getElementById("cancel_order");
         cancel_order_button.onclick = () => {
 
             const sure_cancel_order = confirm("Do you really want to canel this order ?")
 
             if (sure_cancel_order == true) {
-                const cancel_order_api = new XMLHttpRequest();
 
-                cancel_order_api.open("POST", "cancel_order");
+                window.location = "cancel_order";
 
-                cancel_order_api.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-                cancel_order_api.send();
-
-                alert("Order canceled!")
-                location.reload();
             }
         }
 

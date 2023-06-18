@@ -35,6 +35,43 @@
 
     <?= $model["navbar"] ?>
 
+    <!-- Modal -->
+    <div class="modal fade" id="select_payment_method" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="bg-light modal-header">
+                    <h1 class=" modal-title fs-5" id="exampleModalLabel">No payment method selected! ⚠️</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Please select your payment method before transaction.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="briva" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="bg-light modal-header">
+                    <h1 class=" modal-title fs-5" id="exampleModalLabel">Sorry, this service is temporarily unavailable</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Please select other payment method,</br>
+                    Sorry for the inconvenience.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="container py-5">
         <div class="m-1 d-flex justify-content-between align-items-baseline">
             <div>
@@ -266,16 +303,9 @@
             const sure_delete_basket = confirm("Do you really want to delete ?")
 
             if (sure_delete_basket == true) {
-                const clean_basket_api = new XMLHttpRequest();
 
-                clean_basket_api.open("POST", "clean_basket");
+                window.location = "clean_basket";
 
-                clean_basket_api.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-                clean_basket_api.send();
-
-                alert("Basket was cleaned!")
-                location.reload();
             }
         }
 
@@ -286,7 +316,11 @@
 
         checkout.onclick = () => {
             if (payment_method.value == "Payment method") {
-                alert("Select payment method first!")
+                // alert("Select payment method first!")
+
+                let myModal = new bootstrap.Modal(document.getElementById('select_payment_method'), {});
+                myModal.show();
+
             } else {
 
                 if (payment_method.value == "ATM Transfer") {
@@ -295,7 +329,8 @@
 
                 } else if (payment_method.value == "BRIVA") {
 
-                    alert("Sorry, this service is temporarily unavailable");
+                    let myModal = new bootstrap.Modal(document.getElementById('briva'), {});
+                    myModal.show();
 
                 } else {
                     console.info("Tidak diketahui")

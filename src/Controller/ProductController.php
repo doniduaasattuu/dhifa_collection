@@ -14,26 +14,6 @@ class ProductController
         header("location: $path");
     }
 
-    // public function products()
-    // {
-    //     $connection = Database::get_connection();
-    //     $sql = "SELECT * FROM products ORDER BY product_id";
-    //     $statement = $connection->prepare($sql);
-    //     $statement->execute();
-
-    //     $model = [
-    //         "title" => "Products",
-    //         "content" => "Our Products",
-    //         "navbar" => Navbar::get_navbar(),
-    //         "footer" => Footer::get_footer(),
-    //         "statement" => $statement
-    //     ];
-
-    //     View::render("ProductController/show_products", $model);
-
-    //     $connection = null;
-    // }
-
     public function cart()
     {
         if ($_SERVER["REQUEST_METHOD"] == "GET") {
@@ -88,6 +68,7 @@ class ProductController
                     "title" => "Checkout",
                     "navbar" => Navbar::get_navbar(),
                     "total_payment" => $total_payment,
+                    "invoice" => $invoice,
                     "footer" => Footer::get_footer()
                 ];
 
@@ -110,18 +91,9 @@ class ProductController
                     "total_payment" => $total_payment,
                     "verified" => true,
                     "disabled_cancel" => true,
+                    "invoice" => $invoice,
                     "footer" => Footer::get_footer()
                 ];
-
-                // $model = [
-                //     "title" => "Checkout",
-                //     "navbar" => Navbar::get_navbar(),
-                //     "total_payment" => $total_payment,
-                //     "upload_success" => true,
-                //     "verified" => true,
-                //     "disabled_cancel" => true,
-                //     "footer" => Footer::get_footer()
-                // ];
 
                 View::render("ProductController/checkout", $model);
             } else {
@@ -147,21 +119,19 @@ class ProductController
             $product_id = $_POST["product_id"];
             $price = $_POST["price"];
 
-
+            // PENGECEKAN APAKAH SUDAH PERNAH DIBUAT ORDER SEBELUMNYA
             $connection = Database::get_connection();
-            $sql = "SELECT order_id FROM orders WHERE status = 'Open' and email = '$email';";
+            $sql = "SELECT order_id, status FROM orders WHERE status = 'Open' and email = '$email';";
             $statement = $connection->prepare($sql);
             $statement->execute();
 
             $result = $statement->fetchAll();
 
             // CEK APAKAH INVOICE SUDAH DIBUAT
-            if ((int) isset($result[0]["order_id"]) == 1) {
+            if ((int) isset($result[0]["order_id"]) == 1 && $result[0]["status"] == "Open") {
 
                 //  JIKA SUDAH DIBUAT INVOICE
                 $invoice = $result[0]["order_id"];
-
-                echo $invoice;
 
                 // CEK APAKAH PRODUCT ID SUDAH PERNAH DI INPUT SEBELUMNYA
                 $connection = Database::get_connection();
@@ -189,17 +159,28 @@ class ProductController
 
                 // JIKA BELUM DIBUAT INVOICE
                 // MEMBUAT INVOICE
-                $invoice = $_SESSION["invoice"];
 
-                // MEMBUAT INVOICE
-                $sql = "INSERT INTO orders (order_id, email) VALUES ('$invoice','$email');";
-                $connection->query($sql);
+                // PENGECEKAN APAKAH SUDAH PERNAH DIBUAT ORDER SEBELUMNYA
+                $connection = Database::get_connection();
+                $sql = "SELECT status FROM orders WHERE email = '$email';";
+                $statement = $connection->prepare($sql);
+                $statement->execute();
 
-                // MENGINPUT DATA KE DALAM INVOICE
-                $sql = "INSERT INTO order_detail (order_id, product_id, price, amount) VALUES ('$invoice' , '$product_id' , '$price' , '$price')";
-                $connection->query($sql);
+                $result = $statement->fetchAll();
 
-                $connection = null;
+                if ($result[0]["status"] != "Checkout" && $result[0]["status"] != "Verified") {
+                    $invoice = $_SESSION["invoice"];
+
+                    // MEMBUAT INVOICE
+                    $sql = "INSERT INTO orders (order_id, email) VALUES ('$invoice','$email');";
+                    $connection->query($sql);
+
+                    // MENGINPUT DATA KE DALAM INVOICE
+                    $sql = "INSERT INTO order_detail (order_id, product_id, price, amount) VALUES ('$invoice' , '$product_id' , '$price' , '$price')";
+                    $connection->query($sql);
+
+                    $connection = null;
+                }
             }
         }
     }
@@ -268,12 +249,12 @@ class ProductController
 
     public function clean_basket()
     {
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
             $email = $_SESSION["email"];
 
             $connection = Database::get_connection();
-            $sql = "SELECT order_id FROM orders WHERE status = 'Open' and email = '$email';";
+            $sql = "SELECT order_id FROM orders WHERE status = 'Open' AND email = '$email';";
             $statement = $connection->prepare($sql);
             $statement->execute();
 
@@ -290,9 +271,9 @@ class ProductController
                 $sql = "DELETE FROM orders WHERE order_id = '$invoice';";
                 $connection->query($sql);
 
-                self::redirect("cart");
-
                 $connection = null;
+
+                self::redirect("/");
             }
         }
     }
@@ -327,12 +308,12 @@ class ProductController
 
     public function cancel_order()
     {
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
             $email = $_SESSION["email"];
 
             $connection = Database::get_connection();
-            $sql = "SELECT order_id FROM orders WHERE status = 'Checkout' and email = '$email';";
+            $sql = "SELECT order_id FROM orders WHERE status = 'Checkout' AND email = '$email';";
             $statement = $connection->prepare($sql);
             $statement->execute();
 
@@ -343,14 +324,11 @@ class ProductController
 
                 $invoice = $result[0]["order_id"];
 
-                $sql = "DELETE FROM order_detail WHERE order_id ='$invoice';";
+                $sql = "UPDATE orders SET status = 'Open' WHERE order_id = '$invoice';";
                 $connection->query($sql);
+                $connection = null;
 
-
-                $sql = "DELETE FROM orders WHERE order_id = '$invoice';";
-                $connection->query($sql);
-
-                // self::redirect("cart");
+                self::redirect("cart");
             }
         }
     }
@@ -359,11 +337,6 @@ class ProductController
     public function upload_resi()
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-            // $file = $_FILES["name"];
-            // $file_name = $_FILES['payment_receipt']['name'];
-            // $file_size = $_FILES['payment_receipt']['size'];
-            // $file_error = $_FILES['payment_receipt']['error'];
 
             $email = $_SESSION["email"];
 
@@ -383,49 +356,29 @@ class ProductController
 
             move_uploaded_file($file_tmp_name, __DIR__ . "/../../public/payment_receipt/" . "$invoice" . "." . "$format");
 
-            // self::redirect("/");
-
             // RENDER HALAMAN CHECKOUT DENGAN ALERT SUCCESS UPLOAD
             $invoice = $result[0]["order_id"];
 
             $connection = Database::get_connection();
+
+            $sql = "SELECT product_id, qty FROM order_detail WHERE order_id = '$invoice';";
+            $statement = $connection->prepare($sql);
+            $statement->execute();
+
+            foreach ($statement as $result) {
+                $product_id = $result['product_id'];
+                $product_qty = $result['qty'];
+
+                $sql = "UPDATE products SET qty = qty - '$product_qty' WHERE product_id = '$product_id'";
+                $connection->query($sql);
+            }
 
             $sql = "UPDATE orders SET status = 'Verified' WHERE order_id = '$invoice';";
             $connection->query($sql);
 
             self::redirect("cart");
 
-            // $sql = "SELECT total_payment FROM orders WHERE order_id = '$invoice';";
-            // $statement = $connection->prepare($sql);
-
-            // $statement->execute();
-
-            // $total_payment = $statement->fetchAll();
-
-            // $model = [
-            //     "title" => "Checkout",
-            //     "navbar" => Navbar::get_navbar(),
-            //     "total_payment" => $total_payment,
-            //     "upload_success" => true,
-            //     "verified" => true,
-            //     "disabled_cancel" => true,
-            //     "footer" => Footer::get_footer()
-            // ];
-
-            // View::render("ProductController/checkout", $model);
-
             $connection = null;
         }
     }
-
-    // public function checkout()
-    // {
-    //     $model = [
-    //         "title" => "Checkout",
-    //         "content" => "Checkout",
-    //         "navbar" => Navbar::get_navbar()
-    //     ];
-
-    //     View::render("ProductController/checkout", $model);
-    // }
 }
