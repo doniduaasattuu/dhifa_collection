@@ -154,9 +154,6 @@ class UserController
 
                     date_default_timezone_set("Asia/Jakarta");
 
-                    // MEMBUAT INVOICE
-                    $_SESSION["invoice"] = "INV/" . date("Y") . date("m") . date("d") . "/" .  date("H") . date("i");
-
                     // RENDER HALAMAN UTAMA
                     self::redirect("/");
                 } else {

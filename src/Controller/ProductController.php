@@ -21,7 +21,7 @@ class ProductController
             $email = $_SESSION["email"];
 
             $connection = Database::get_connection();
-            $sql = "SELECT order_id, status FROM orders WHERE email = '$email';";
+            $sql = "SELECT order_id, status FROM orders WHERE email = '$email' ORDER BY order_id DESC LIMIT 1;";
             $statement = $connection->prepare($sql);
             $statement->execute();
 
@@ -169,7 +169,8 @@ class ProductController
                 $result = $statement->fetchAll();
 
                 if ($result[0]["status"] != "Checkout" && $result[0]["status"] != "Verified") {
-                    $invoice = $_SESSION["invoice"];
+
+                    $invoice = "INV/" . date("Y") . date("m") . date("d") . "/" .  date("H") . date("i") . date("s");
 
                     // MEMBUAT INVOICE
                     $sql = "INSERT INTO orders (order_id, email) VALUES ('$invoice','$email');";
