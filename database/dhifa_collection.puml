@@ -21,8 +21,9 @@ Entity orders {
     * order_id: VARCHAR(50) <<PK>> <<FK>>
     --
     * email: VARCHAR(30) <<PK>> <<FK>>
-    * total: BIGINT
-    * status: ENUM("Open", "Close")
+    * order_date: DATE
+    * total_payment: BIGINT
+    * status: ENUM("Open", "Checkout", "Verified", "Close")
 }
 
 Entity order_detail {
