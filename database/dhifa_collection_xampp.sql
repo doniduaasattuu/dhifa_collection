@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 18, 2023 at 09:54 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Jun 20, 2023 at 09:03 AM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,7 +31,7 @@ CREATE TABLE `orders` (
   `order_id` varchar(50) NOT NULL,
   `email` varchar(30) NOT NULL,
   `order_date` date NOT NULL DEFAULT current_timestamp(),
-  `total_payment` bigint(20) NOT NULL DEFAULT 0,
+  `total_payment` int(8) NOT NULL DEFAULT 0,
   `status` enum('Open','Checkout','Verified','Close') NOT NULL DEFAULT 'Open'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -45,9 +45,9 @@ CREATE TABLE `order_detail` (
   `id` int(11) NOT NULL,
   `order_id` varchar(50) NOT NULL,
   `product_id` int(11) NOT NULL,
-  `price` int(11) NOT NULL,
-  `qty` int(11) NOT NULL DEFAULT 1,
-  `amount` int(11) NOT NULL
+  `price` int(8) NOT NULL,
+  `qty` int(2) NOT NULL DEFAULT 1,
+  `amount` int(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -59,8 +59,8 @@ CREATE TABLE `order_detail` (
 CREATE TABLE `products` (
   `product_id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `price` bigint(20) NOT NULL,
-  `qty` int(11) NOT NULL
+  `price` int(8) NOT NULL,
+  `qty` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -68,9 +68,9 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`product_id`, `name`, `price`, `qty`) VALUES
-(1, 'Pepe Jeans', 120, 100),
-(2, 'The Run', 110, 100),
-(3, 'Style Vesture', 150, 100),
+(1, 'Pepe Jeans', 120, 97),
+(2, 'The Run', 110, 98),
+(3, 'Style Vesture', 150, 99),
 (4, 'Sweet Rose', 165, 100),
 (5, 'Frock Works', 135, 100),
 (6, 'Honey Punch', 155, 100),
@@ -94,14 +94,6 @@ CREATE TABLE `users` (
   `address` varchar(200) NOT NULL,
   `phone_number` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`email`, `password`, `fullname`, `address`, `phone_number`) VALUES
-('adzkiya@gmail.com', '0110', 'Adzkiya Putri Azzahra', 'RT.05/RW.05, Ds.Kedungglagah, Kec.Geneng, Kab.Ngawi, Kode Pos 63253', '08123456789'),
-('doni@gmail.com', '1234', 'Doni Darmawan', 'RT.01/RW.04, Kp.Pengkolan, Ds.Kalijaya, Kec.Cikarang Barat, Kab.Bekasi, Kode Pos 17530', '08983456945');
 
 --
 -- Indexes for dumped tables

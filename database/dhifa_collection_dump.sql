@@ -1,8 +1,8 @@
--- MariaDB dump 10.19  Distrib 10.4.28-MariaDB, for Win64 (AMD64)
+-- MariaDB dump 10.19  Distrib 10.4.27-MariaDB, for Win64 (AMD64)
 --
 -- Host: localhost    Database: dhifa_collection
 -- ------------------------------------------------------
--- Server version	10.4.28-MariaDB
+-- Server version	10.4.27-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -26,9 +26,9 @@ CREATE TABLE `order_detail` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` varchar(50) NOT NULL,
   `product_id` int(11) NOT NULL,
-  `price` int(11) NOT NULL,
-  `qty` int(11) NOT NULL DEFAULT 1,
-  `amount` int(11) NOT NULL,
+  `price` int(8) NOT NULL,
+  `qty` int(2) NOT NULL DEFAULT 1,
+  `amount` int(8) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_order_detail_to_products` (`product_id`),
   KEY `fk_order_id_to_orders` (`order_id`),
@@ -58,7 +58,7 @@ CREATE TABLE `orders` (
   `order_id` varchar(50) NOT NULL,
   `email` varchar(30) NOT NULL,
   `order_date` date NOT NULL DEFAULT current_timestamp(),
-  `total_payment` bigint(20) NOT NULL DEFAULT 0,
+  `total_payment` int(8) NOT NULL DEFAULT 0,
   `status` enum('Open','Checkout','Verified','Close') NOT NULL DEFAULT 'Open',
   PRIMARY KEY (`order_id`),
   KEY `fk_orders_to_users_email` (`email`),
@@ -85,8 +85,8 @@ DROP TABLE IF EXISTS `products`;
 CREATE TABLE `products` (
   `product_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
-  `price` bigint(20) NOT NULL,
-  `qty` int(11) NOT NULL,
+  `price` int(8) NOT NULL,
+  `qty` int(2) NOT NULL,
   PRIMARY KEY (`product_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -97,7 +97,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,'Pepe Jeans',120,100),(2,'The Run',110,100),(3,'Style Vesture',150,100),(4,'Sweet Rose',165,100),(5,'Frock Works',135,100),(6,'Honey Punch',155,100),(7,'Nighty Nine',170,100),(8,'The Goodly',155,100),(9,'Fine Touch',145,100),(10,'Simply Seattle',180,100),(11,'Seemly Garb',125,100),(12,'Style Wear',170,100);
+INSERT INTO `products` VALUES (1,'Pepe Jeans',120,97),(2,'The Run',110,98),(3,'Style Vesture',150,99),(4,'Sweet Rose',165,100),(5,'Frock Works',135,100),(6,'Honey Punch',155,100),(7,'Nighty Nine',170,100),(8,'The Goodly',155,100),(9,'Fine Touch',145,100),(10,'Simply Seattle',180,100),(11,'Seemly Garb',125,100),(12,'Style Wear',170,100);
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -124,7 +124,6 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('adzkiya@gmail.com','0110','Adzkiya Putri Azzahra','RT.05/RW.05, Ds.Kedungglagah, Kec.Geneng, Kab.Ngawi, Kode Pos 63253','08123456789'),('doni@gmail.com','1234','Doni Darmawan','RT.01/RW.04, Kp.Pengkolan, Ds.Kalijaya, Kec.Cikarang Barat, Kab.Bekasi, Kode Pos 17530','08983456945');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -137,4 +136,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-18 14:55:34
+-- Dump completed on 2023-06-20 14:04:21

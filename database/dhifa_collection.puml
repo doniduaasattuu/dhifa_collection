@@ -6,15 +6,15 @@ Entity users {
     * password: VARCHAR(30)
     * fullname: VARHCAR(100)
     * address: VARHCAR(200)
-    * phone_number: VARHCAR(50)
+    * phone_number: VARHCAR(20)
 }
 
 Entity products {
-    * id_product: INT(11) AI <<PK>>
+    * product_id: INT(11) AUTO_INCREMENT <<PK>>
     --
     * name: VARCHAR(100)
-    * price: BIGINT
-    * qty: INT(11)
+    * price: INT(8)
+    * qty: INT(2)
 }
 
 Entity orders {
@@ -22,17 +22,18 @@ Entity orders {
     --
     * email: VARCHAR(30) <<PK>> <<FK>>
     * order_date: DATE
-    * total_payment: BIGINT
+    * total_payment: INT(8)
     * status: ENUM("Open", "Checkout", "Verified", "Close")
 }
 
 Entity order_detail {
-    * id_order: INT(11) <<PK>>
+    * id: INT(11) AUTO_INCREMENT
     --
+    * order_id: VARCHAR(50) <<PK>>
     * product_id: INT(11) <<FK>>
-    * price: INT(11)
-    * qty: INT(11)
-    * amount: INT(11)
+    * price: INT(8)
+    * qty: INT(2)
+    * amount: INT(8)
 }
 
 users |o--o{ orders: memiliki
